@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aegis Company Digital</title>
+    <!-- Librería html2canvas para la descarga en PNG -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      }
+
+      body {
+        background-color: #f4f6f9;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+      }
+
+      .card {
+        width: 100%;
+        max-width: 420px;
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 25px 20px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        margin-bottom: 20px;
+      }
+
+      h2 {
+        font-size: 18px;
+        color: #1e293b;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      .form-group label {
+        display: block;
+        font-size: 13px;
+        color: #64748b;
+        margin-bottom: 5px;
+        font-weight: 600;
+      }
+
+      .form-group input {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        font-size: 14px;
+      }
+
+      .btn-primary {
+        width: 100%;
+        background-color: #2563eb;
+        color: white;
+        border: none;
+        padding: 12px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 15px;
+        cursor: pointer;
+        margin-top: 10px;
+      }
+      .btn-primary:hover {
+        background-color: #1d4ed8;
+      }
+
+      /* Estilos del Voucher */
+      .success-icon {
+        width: 48px;
+        height: 48px;
+        background-color: #10b981;
+        color: #ffffff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        font-weight: bold;
+        margin: 0 auto 12px auto;
+      }
+
+      .title {
+        text-align: center;
+        font-size: 18px;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 22px;
+      }
+
+      .section-title {
+        font-size: 14px;
+        font-weight: 800;
+        color: #0f172a;
+        margin-top: 14px;
+        margin-bottom: 6px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+      }
+
+      table td {
+        padding-bottom: 6px;
+      }
+
+      .text-label {
+        color: #64748b;
+      }
+
+      .text-value {
+        color: #0f172a;
+        font-weight: 700;
+        text-align: right;
+      }
+
+      .monto-row td {
+        font-size: 20px;
+        font-weight: 800;
+        color: #0f172a;
+      }
+
+      .divider {
+        border: none;
+        border-top: 1px dotted #cbd5e1;
+        margin: 14px 0;
+      }
+
+      /* Botones de acción del Voucher */
+      .voucher-actions {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .btn {
+        border: none;
+        padding: 12px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 14px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+      }
+
+      .btn-print {
+        background-color: #0f172a;
+        color: white;
+      }
+      .btn-print:hover {
+        background-color: #1e293b;
+      }
+
+      .btn-png {
+        background-color: #059669;
+        color: white;
+      }
+      .btn-png:hover {
+        background-color: #047857;
+      }
+
+      .btn-close {
+        background-color: #ef4444;
+        color: white;
+      }
+      .btn-close:hover {
+        background-color: #dc2626;
+      }
+
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- VISTA 1: Formulario Principal -->
+    <div class="card" id="main-section">
+      <h2>Aegis Company Digital - Transferencias</h2>
+      <div class="form-group">
+        <label>Monto a transferir ($)</label>
+        <input type="text" id="input-monto" value="50.000" />
+      </div>
+      <div class="form-group">
+        <label>Nombre del Destinatario</label>
+        <input type="text" id="input-nombre" value="Juan Pérez" />
+      </div>
+      <div class="form-group">
+        <label>RUT del Destinatario</label>
+        <input type="text" id="input-rut" value="12.345.678-9" />
+      </div>
+      <div class="form-group">
+        <label>Banco</label>
+        <input type="text" id="input-banco" value="BancoEstado" />
+      </div>
+      <div class="form-group">
+        <label>Número de Cuenta</label>
+        <input type="text" id="input-cuenta" value="12345678" />
+      </div>
+      <button class="btn-primary" onclick="simularTransferencia()">
+        Generar Comprobante
+      </button>
+    </div>
+
+    <!-- VISTA 2: Sección del Voucher (Oculta por defecto) -->
+    <div
+      id="voucher-section"
+      class="hidden"
+      style="width: 100%; max-width: 420px"
+    >
+      <!-- Tarjeta Capturable para PNG -->
+      <div class="card" id="voucher-card" style="margin-bottom: 0">
+        <div class="success-icon">✓</div>
+        <div class="title">Comprobante de Transferencia</div>
+
+        <table>
+          <tr class="monto-row">
+            <td class="text-label">Monto</td>
+            <td class="text-value" id="lbl-monto">$50.000</td>
+          </tr>
+        </table>
+
+        <div class="section-title">Destinatario</div>
+        <table>
+          <tr>
+            <td class="text-label">Nombre</td>
+            <td class="text-value" id="lbl-nombre">Juan Pérez</td>
+          </tr>
+          <tr>
+            <td class="text-label">RUT</td>
+            <td class="text-value" id="lbl-rut">12.345.678-9</td>
+          </tr>
+          <tr>
+            <td class="text-label">Banco</td>
+            <td class="text-value" id="lbl-banco">BancoEstado</td>
+          </tr>
+          <tr>
+            <td class="text-label">Cuenta</td>
+            <td class="text-value" id="lbl-cuenta">12345678</td>
+          </tr>
+        </table>
+
+        <div class="section-title">Cuenta de origen</div>
+        <table>
+          <tr>
+            <td class="text-label" style="vertical-align: top">Cuenta</td>
+            <td class="text-value">
+              Felipe Quinteros<br />
+              Cuenta Vista<br />
+              00010363459
+            </td>
+          </tr>
+        </table>
+
+        <hr class="divider" />
+
+        <table>
+          <tr>
+            <td class="text-label">Fecha y hora</td>
+            <td class="text-value" id="lbl-fecha">28/09/2026 - 18:16</td>
+          </tr>
+          <tr>
+            <td class="text-label">N° de operación</td>
+            <td class="text-value" id="lbl-operacion">8492019</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- Botones de Acción (Fuera de la captura PNG) -->
+      <div class="voucher-actions">
+        <!-- 1. Imprimir voucher (Térmica / Sistema) -->
+        <button class="btn btn-print" onclick="imprimirVoucher()">
+          🖨️ Imprimir voucher
+        </button>
+
+        <!-- 2. Guardar voucher en PNG -->
+        <button class="btn btn-png" onclick="guardarVoucherPng()">
+          📥 Guardar voucher en PNG
+        </button>
+
+        <!-- 3. Cerrar voucher -->
+        <button class="btn btn-close" onclick="cerrarVoucher()">
+          ❌ Cerrar voucher
+        </button>
+      </div>
+    </div>
+
+    <script>
+      function simularTransferencia() {
+        // Pasar datos del formulario al voucher
+        document.getElementById("lbl-monto").innerText =
+          "$" + document.getElementById("input-monto").value;
+        document.getElementById("lbl-nombre").innerText =
+          document.getElementById("input-nombre").value;
+        document.getElementById("lbl-rut").innerText =
+          document.getElementById("input-rut").value;
+        document.getElementById("lbl-banco").innerText =
+          document.getElementById("input-banco").value;
+        document.getElementById("lbl-cuenta").innerText =
+          document.getElementById("input-cuenta").value;
+
+        // Generar número de operación aleatorio
+        document.getElementById("lbl-operacion").innerText = Math.floor(
+          100000 + Math.random() * 900000,
+        );
+
+        // Cambiar de vista
+        document.getElementById("main-section").classList.add("hidden");
+        document.getElementById("voucher-section").classList.remove("hidden");
+      }
+
+      // 1. Imprimir voucher
+      function imprimirVoucher() {
+        window.print();
+      }
+
+      // 2. Guardar voucher en PNG
+      function guardarVoucherPng() {
+        const elemento = document.getElementById("voucher-card");
+        html2canvas(elemento, { scale: 2 }).then((canvas) => {
+          const link = document.createElement("a");
+          link.download = "Comprobante_Aegis.png";
+          link.href = canvas.toDataURL("image/png");
+          link.click();
+        });
+      }
+
+      // 3. Cerrar voucher (Regresa a la pantalla principal)
+      function cerrarVoucher() {
+        document.getElementById("voucher-section").classList.add("hidden");
+        document.getElementById("main-section").classList.remove("hidden");
+      }
+    </script>
+  </body>
+</html>
