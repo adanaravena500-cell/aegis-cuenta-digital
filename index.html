@@ -170,7 +170,7 @@
             position: relative;
         }
 
-        /* Estilo de Tarjeta de Actividad / Movimiento con Botón Ver Voucher */
+        /* Tarjeta de Actividad / Movimiento con Botón Ver Voucher */
         .activity-card {
             background: #ffffff;
             border: 1px solid #e2e8f0;
@@ -203,10 +203,7 @@
         .activity-details .title { font-size: 14px; font-weight: 700; color: #0f172a; }
         .activity-details .subtitle { font-size: 11px; color: #64748b; margin-top: 2px; }
 
-        .activity-right {
-            text-align: right;
-        }
-
+        .activity-right { text-align: right; }
         .activity-amount { font-size: 14px; font-weight: 800; color: #ef4444; margin-bottom: 6px; }
         .activity-amount.positive { color: #10b981; }
 
@@ -282,7 +279,6 @@
         .btn { border: none; padding: 12px; border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; }
         .btn-print { background-color: #0f172a; color: white; }
         .btn-png { background-color: #059669; color: white; }
-        .btn-email { background-color: #2563eb; color: white; }
         .btn-close { background-color: #ef4444; color: white; }
 
         /* Barra de Navegación Inferior */
@@ -410,7 +406,7 @@
                     <input type="text" id="input-nombre" value="Juan Pérez">
                 </div>
                 <div class="form-group">
-                    <label>Correo Electrónico Destinatario (Opcional)</label>
+                    <label>Correo Electrónico Destinatario</label>
                     <input type="email" id="input-email" placeholder="destinatario@ejemplo.com" value="destinatario@ejemplo.com">
                 </div>
                 <div class="form-group">
@@ -464,7 +460,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Correo Electrónico Destinatario / Empresa (Opcional)</label>
+                    <label>Correo Electrónico de la Empresa</label>
                     <input type="email" id="serv-email" value="contacto@enel.cl">
                 </div>
                 <div class="form-group">
@@ -494,7 +490,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Correo Electrónico (Opcional)</label>
+                    <label>Correo Electrónico</label>
                     <input type="email" id="rec-email" value="recargas@movistar.cl">
                 </div>
                 <div class="form-group">
@@ -647,9 +643,6 @@
                 <button class="btn btn-png" onclick="guardarVoucherPng()">
                     📥 Guardar voucher en PNG
                 </button>
-                <button class="btn btn-email" onclick="enviarPorCorreoReal()">
-                    ✉️ Enviar por correo al destinatario
-                </button>
                 <button class="btn btn-close" onclick="cerrarVoucher()">
                     ❌ Cerrar voucher
                 </button>
@@ -775,6 +768,27 @@
             }
         }
 
+        // --- ENVÍO DE CORREO AUTOMÁTICO INMEDIATO ---
+        function dispararCorreoAutomatico(item) {
+            const asunto = encodeURIComponent("Comprobante de Operación - Aegis Company Digital");
+            const cuerpo = encodeURIComponent(
+                `Hola ${item.nombre},\n\n` +
+                `Se ha procesado una transferencia/pago a tu favor desde Aegis Company Digital de forma automática.\n\n` +
+                `--- DETALLES DE LA TRANSACCIÓN ---\n` +
+                `Concepto: ${item.concepto}\n` +
+                `Monto: ${item.monto}\n` +
+                `Fecha y Hora: ${item.fecha}\n` +
+                `N° de Operación: ${item.operacion}\n` +
+                `Origen: Felipe Quinteros (Cuenta Vista 00010363459)\n\n` +
+                `Atentamente,\nAegis Company Digital`
+            );
+
+            // Abre automáticamente el cliente de correo para enviar al destinatario sin esperas
+            setTimeout(() => {
+                window.open(`mailto:${item.correo}?subject=${asunto}&body=${cuerpo}`, '_blank');
+            }, 500);
+        }
+
         function procesarTransferencia() {
             const monto = parseInt(document.getElementById('input-monto').value) || 0;
             const nombre = document.getElementById('input-nombre').value;
@@ -807,6 +821,10 @@
 
             historialMovimientos.unshift(nuevoItem);
             actualizarHistorialUI();
+            
+            // DISPARO AUTOMÁTICO INMEDIATO DEL CORREO AL DESTINATARIO
+            dispararCorreoAutomatico(nuevoItem);
+
             cargarVoucherEnPantalla(nuevoItem);
         }
 
@@ -840,6 +858,8 @@
 
             historialMovimientos.unshift(nuevoItem);
             actualizarHistorialUI();
+            
+            dispararCorreoAutomatico(nuevoItem);
             cargarVoucherEnPantalla(nuevoItem);
         }
 
@@ -873,6 +893,8 @@
 
             historialMovimientos.unshift(nuevoItem);
             actualizarHistorialUI();
+            
+            dispararCorreoAutomatico(nuevoItem);
             cargarVoucherEnPantalla(nuevoItem);
         }
 
@@ -917,27 +939,6 @@
                 link.href = canvas.toDataURL('image/png');
                 link.click();
             });
-        }
-
-        // Envío real al correo del destinatario mediante mailto preconfigurado
-        function enviarPorCorreoReal() {
-            if (!transaccionActual) return;
-            const correoDestino = transaccionActual.correo;
-            const asunto = encodeURIComponent("Comprobante de Operación - Aegis Company Digital");
-            const cuerpo = encodeURIComponent(
-                `Hola ${transaccionActual.nombre},\n\n` +
-                `Se ha generado un comprobante de operación a tu nombre desde Aegis Company Digital.\n\n` +
-                `--- DETALLES DE LA TRANSACCIÓN ---\n` +
-                `Concepto: ${transaccionActual.concepto}\n` +
-                `Monto: ${transaccionActual.monto}\n` +
-                `Fecha y Hora: ${transaccionActual.fecha}\n` +
-                `N° de Operación: ${transaccionActual.operacion}\n` +
-                `Origen: Felipe Quinteros (Cuenta Vista 00010363459)\n\n` +
-                `Atentamente,\nAegis Company Digital`
-            );
-
-            // Abre el cliente de correo del emisor directo al correo del destinatario
-            window.location.href = `mailto:${correoDestino}?subject=${asunto}&body=${cuerpo}`;
         }
 
         function cerrarVoucher() {
