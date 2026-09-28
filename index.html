@@ -20,7 +20,7 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            padding-bottom: 70px; /* Espacio para la barra inferior */
+            padding-bottom: 70px;
         }
 
         /* Cabecera de Usuario */
@@ -92,46 +92,14 @@
             padding: 20px;
             box-shadow: 0 8px 20px rgba(29, 78, 216, 0.25);
             margin-bottom: 15px;
-            position: relative;
         }
 
-        .debit-card .card-type {
-            font-size: 13px;
-            color: #bfdbfe;
-            font-weight: 500;
-        }
-
-        .debit-card .balance-label {
-            font-size: 12px;
-            color: #93c5fd;
-            margin-top: 12px;
-        }
-
-        .debit-card .balance-amount {
-            font-size: 28px;
-            font-weight: 800;
-            margin-top: 2px;
-        }
-
-        .debit-card .card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 20px;
-        }
-
-        .debit-card .card-number {
-            font-size: 14px;
-            letter-spacing: 2px;
-            color: #e0e7ff;
-        }
-
-        .debit-card .visa-logo {
-            font-weight: 800;
-            font-style: italic;
-            font-size: 16px;
-            letter-spacing: 1px;
-        }
+        .debit-card .card-type { font-size: 13px; color: #bfdbfe; font-weight: 500; }
+        .debit-card .balance-label { font-size: 12px; color: #93c5fd; margin-top: 12px; }
+        .debit-card .balance-amount { font-size: 28px; font-weight: 800; margin-top: 2px; }
+        .debit-card .card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; }
+        .debit-card .card-number { font-size: 14px; letter-spacing: 2px; color: #e0e7ff; }
+        .debit-card .visa-logo { font-weight: 800; font-style: italic; font-size: 16px; letter-spacing: 1px; }
 
         /* Botón Fintoc */
         .btn-fintoc {
@@ -158,6 +126,7 @@
             font-weight: 700;
             color: #0f172a;
             margin-bottom: 15px;
+            margin-top: 10px;
         }
 
         .services-grid {
@@ -180,10 +149,7 @@
             transition: all 0.2s;
         }
 
-        .service-item:hover {
-            border-color: #2563eb;
-            transform: translateY(-2px);
-        }
+        .service-item:hover { border-color: #2563eb; transform: translateY(-2px); }
 
         .service-icon {
             width: 42px;
@@ -196,42 +162,22 @@
             margin-bottom: 6px;
         }
 
-        .service-text {
-            font-size: 11px;
-            font-weight: 600;
-            color: #334155;
-            text-align: center;
-        }
+        .service-text { font-size: 11px; font-weight: 600; color: #334155; text-align: center; }
 
-        /* Actividades recientes */
+        /* Tarjetas de Contenedores */
         .card-box {
             background: #ffffff;
             border-radius: 16px;
             padding: 20px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.03);
             border: 1px solid #e2e8f0;
-        }
-
-        /* Formularios y vistas internas */
-        .form-group {
             margin-bottom: 15px;
         }
 
-        .form-group label {
-            display: block;
-            font-size: 13px;
-            color: #64748b;
-            margin-bottom: 5px;
-            font-weight: 600;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
-            font-size: 14px;
-        }
+        /* Formularios */
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-size: 13px; color: #64748b; margin-bottom: 5px; font-weight: 600; }
+        .form-group input, .form-group select { width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; background: #fff; }
 
         .btn-primary {
             width: 100%;
@@ -245,8 +191,9 @@
             cursor: pointer;
             margin-top: 10px;
         }
+        .btn-primary:hover { background-color: #1d4ed8; }
 
-        /* Voucher / Comprobante Estilos */
+        /* Voucher / Comprobante */
         .voucher-card {
             background: #ffffff;
             border-radius: 16px;
@@ -269,60 +216,25 @@
             margin: 0 auto 12px auto;
         }
 
-        .voucher-title {
-            text-align: center;
-            font-size: 18px;
-            font-weight: 700;
-            color: #1e293b;
-            margin-bottom: 22px;
-        }
+        .voucher-title { text-align: center; font-size: 18px; font-weight: 700; color: #1e293b; margin-bottom: 22px; }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 13px;
-        }
-
-        table td {
-            padding-bottom: 6px;
-        }
-
+        table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        table td { padding-bottom: 6px; }
         .text-label { color: #64748b; }
         .text-value { color: #0f172a; font-weight: 700; text-align: right; }
         .monto-row td { font-size: 20px; font-weight: 800; color: #0f172a; }
 
-        .divider {
-            border: none;
-            border-top: 1px dotted #cbd5e1;
-            margin: 14px 0;
-        }
+        .divider { border: none; border-top: 1px dotted #cbd5e1; margin: 14px 0; }
 
         /* Botones de acción del Voucher */
-        .voucher-actions {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .btn {
-            border: none;
-            padding: 12px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 14px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            width: 100%;
-        }
-
+        .voucher-actions { display: flex; flex-direction: column; gap: 10px; }
+        .btn { border: none; padding: 12px; border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; }
         .btn-print { background-color: #0f172a; color: white; }
         .btn-png { background-color: #059669; color: white; }
+        .btn-email { background-color: #2563eb; color: white; }
         .btn-close { background-color: #ef4444; color: white; }
 
-        /* Barra de navegación inferior móvil */
+        /* Barra de Navegación Inferior */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -348,10 +260,7 @@
             color: #64748b;
             cursor: pointer;
         }
-
-        .nav-item.active {
-            color: #2563eb;
-        }
+        .nav-item.active { color: #2563eb; }
 
         .hidden { display: none; }
     </style>
@@ -367,34 +276,32 @@
                 <div class="name">Felipe Quinteros</div>
             </div>
         </div>
-        <button class="notification-btn">🔔</button>
+        <button class="notification-btn" onclick="alert('Sin notificaciones nuevas')">🔔</button>
     </div>
 
     <!-- Contenedor Principal -->
     <div class="container">
 
-        <!-- VISTA 1: INICIO (Dashboard Completo) -->
+        <!-- 1. INICIO (Dashboard) -->
         <div id="view-inicio">
-            <!-- Tarjeta de Cuenta -->
             <div class="debit-card">
                 <div class="card-type">Cuenta Vista / Débito</div>
                 <div class="balance-label">Saldo Disponible</div>
-                <div class="balance-amount">$1.450.000</div>
+                <div class="balance-amount" id="lbl-saldo">$1.450.000</div>
                 <div class="card-footer">
                     <div class="card-number">**** **** **** 5678</div>
                     <div class="visa-logo">VISA</div>
                 </div>
             </div>
 
-            <button class="btn-fintoc">
+            <button class="btn-fintoc" onclick="alert('Banco vinculado exitosamente con Fintoc API.')">
                 🔗 Conectar Banco con Fintoc
             </button>
 
             <div class="section-title">Servicios y Operaciones</div>
             
-            <!-- Grilla de 8 Servicios -->
             <div class="services-grid">
-                <div class="service-item" onclick="alert('Módulo de Servicios')">
+                <div class="service-item" onclick="cambiarVista('servicios')">
                     <div class="service-icon" style="background: #eff6ff; color: #2563eb;">📄</div>
                     <div class="service-text">Pagar Servicios</div>
                 </div>
@@ -406,42 +313,41 @@
                     <div class="service-icon" style="background: #faf5ff; color: #9333ea;">⏱️</div>
                     <div class="service-text">Movimientos</div>
                 </div>
-                <div class="service-item" onclick="alert('Módulo de Recargas')">
+                <div class="service-item" onclick="cambiarVista('recargas')">
                     <div class="service-icon" style="background: #fff7ed; color: #ea580c;">📱</div>
                     <div class="service-text">Recargas</div>
                 </div>
-                <div class="service-item" onclick="alert('Módulo de Tarjetas')">
+                <div class="service-item" onclick="cambiarVista('tarjetas')">
                     <div class="service-icon" style="background: #fef2f2; color: #dc2626;">💳</div>
                     <div class="service-text">Mis Tarjetas</div>
                 </div>
-                <div class="service-item" onclick="alert('Módulo Pago QR')">
+                <div class="service-item" onclick="cambiarVista('qr')">
                     <div class="service-icon" style="background: #ecfdf5; color: #059669;">📱</div>
                     <div class="service-text">Pago QR</div>
                 </div>
-                <div class="service-item" onclick="alert('Módulo Avances')">
+                <div class="service-item" onclick="cambiarVista('avances')">
                     <div class="service-icon" style="background: #fefce8; color: #ca8a04;">💵</div>
                     <div class="service-text">Avances</div>
                 </div>
-                <div class="service-item" onclick="alert('Módulo Seguridad')">
+                <div class="service-item" onclick="cambiarVista('seguridad')">
                     <div class="service-icon" style="background: #f0fdfa; color: #0d9488;">🛡️</div>
                     <div class="service-text">Seguridad</div>
                 </div>
             </div>
 
-            <!-- Últimas actividades -->
             <div class="section-title">Últimas Actividades</div>
-            <div class="card-box">
+            <div class="card-box" id="lista-actividades-home">
                 <div style="font-size: 13px; color: #64748b; text-align: center; padding: 10px 0;">Sin movimientos recientes</div>
             </div>
         </div>
 
-        <!-- VISTA 2: TRANSFERIR (Formulario) -->
+        <!-- 2. TRANSFERIR -->
         <div id="view-transferir" class="hidden">
             <div class="card-box">
                 <h2 style="font-size: 16px; margin-bottom: 15px; text-align: center;">Realizar Transferencia</h2>
                 <div class="form-group">
                     <label>Monto a transferir ($)</label>
-                    <input type="text" id="input-monto" value="50.000">
+                    <input type="number" id="input-monto" value="50000">
                 </div>
                 <div class="form-group">
                     <label>Nombre del Destinatario</label>
@@ -459,19 +365,122 @@
                     <label>Número de Cuenta</label>
                     <input type="text" id="input-cuenta" value="12345678">
                 </div>
-                <button class="btn-primary" onclick="simularTransferencia()">Generar Comprobante</button>
+                <button class="btn-primary" onclick="procesarTransferencia()">Generar Comprobante</button>
             </div>
         </div>
 
-        <!-- VISTA 3: MOVIMIENTOS -->
+        <!-- 3. PAGAR SERVICIOS -->
+        <div id="view-servicios" class="hidden">
+            <div class="card-box">
+                <h2 style="font-size: 16px; margin-bottom: 15px; text-align: center;">Pago de Servicios</h2>
+                <div class="form-group">
+                    <label>Seleccionar Empresa</label>
+                    <select id="serv-empresa">
+                        <option>CGE Distribución (Electricidad)</option>
+                        <option>Nuevo Sur (Agua Potable)</option>
+                        <option>Entel / Movistar (Internet y Telefonía)</option>
+                        <option>Gasco / Abastible (Gas)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Número de Cliente o Medidor</label>
+                    <input type="text" id="serv-cliente" placeholder="Ej: 9876543">
+                </div>
+                <div class="form-group">
+                    <label>Monto a Pagar ($)</label>
+                    <input type="number" id="serv-monto" value="18500">
+                </div>
+                <button class="btn-primary" onclick="pagarServicio()">Pagar Cuenta</button>
+            </div>
+        </div>
+
+        <!-- 4. RECARGAS -->
+        <div id="view-recargas" class="hidden">
+            <div class="card-box">
+                <h2 style="font-size: 16px; margin-bottom: 15px; text-align: center;">Recarga de Celular</h2>
+                <div class="form-group">
+                    <label>Compañía</label>
+                    <select id="rec-comp">
+                        <option>Entel</option>
+                        <option>Movistar</option>
+                        <option>WOM</option>
+                        <option>Claro</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Número de Teléfono</label>
+                    <input type="text" id="rec-fono" placeholder="+569...">
+                </div>
+                <div class="form-group">
+                    <label>Monto de Recarga ($)</label>
+                    <input type="number" id="rec-monto" value="5000">
+                </div>
+                <button class="btn-primary" onclick="hacerRecarga()">Realizar Recarga</button>
+            </div>
+        </div>
+
+        <!-- 5. MIS TARJETAS -->
+        <div id="view-tarjetas" class="hidden">
+            <div class="card-box" style="text-align: center;">
+                <h2 style="font-size: 16px; margin-bottom: 15px;">Gestión de Tarjetas</h2>
+                <div class="debit-card" style="margin-bottom: 15px;">
+                    <div class="card-type">Tarjeta Digital Activa</div>
+                    <div class="balance-label">CVV: 489</div>
+                    <div class="card-footer">
+                        <div class="card-number">**** 5678</div>
+                        <div class="visa-logo">VISA</div>
+                    </div>
+                </div>
+                <button class="btn-primary" style="background-color: #dc2626;" onclick="alert('Tarjeta bloqueada temporalmente por seguridad.')">Bloquear Tarjeta</button>
+            </div>
+        </div>
+
+        <!-- 6. PAGO QR -->
+        <div id="view-qr" class="hidden">
+            <div class="card-box" style="text-align: center;">
+                <h2 style="font-size: 16px; margin-bottom: 15px;">Pago con Código QR</h2>
+                <div style="background: #f1f5f9; padding: 30px; border-radius: 12px; margin-bottom: 15px; font-size: 60px;">
+                    📷
+                </div>
+                <p style="font-size: 13px; color: #64748b; margin-bottom: 15px;">Apunta con tu cámara al código QR del comercio para pagar de forma instantánea.</p>
+                <button class="btn-primary" onclick="alert('Escaneo simulado con éxito. Pago procesado.')">Simular Escaneo QR</button>
+            </div>
+        </div>
+
+        <!-- 7. AVANCES -->
+        <div id="view-avances" class="hidden">
+            <div class="card-box">
+                <h2 style="font-size: 16px; margin-bottom: 15px; text-align: center;">Avance en Efectivo</h2>
+                <div class="form-group">
+                    <label>Monto disponible para avance</label>
+                    <input type="text" value="$500.000" disabled style="background:#f1f5f9;">
+                </div>
+                <div class="form-group">
+                    <label>Monto a solicitar ($)</label>
+                    <input type="number" id="av-monto" value="100000">
+                </div>
+                <button class="btn-primary" onclick="pedirAvance()">Solicitar Avance</button>
+            </div>
+        </div>
+
+        <!-- 8. SEGURIDAD -->
+        <div id="view-seguridad" class="hidden">
+            <div class="card-box">
+                <h2 style="font-size: 16px; margin-bottom: 15px; text-align: center;">Configuración de Seguridad</h2>
+                <div style="font-size: 13px; margin-bottom: 15px;">
+                    <p style="margin-bottom: 10px;">🔒 <b>Bloqueo Biométrico:</b> Activado</p>
+                    <p style="margin-bottom: 10px;">🔔 <b>Notificaciones SMS:</b> Activado</p>
+                    <p style="margin-bottom: 10px;">🔑 <b>Clave Dinámica:</b> Sincronizada</p>
+                </div>
+                <button class="btn-primary" onclick="alert('Configuración de seguridad actualizada con éxito.')">Guardar Cambios</button>
+            </div>
+        </div>
+
+        <!-- 9. MOVIMIENTOS HISTORIAL -->
         <div id="view-movimientos" class="hidden">
             <div class="card-box">
                 <h2 style="font-size: 16px; margin-bottom: 15px;">Historial de Movimientos</h2>
-                <ul style="list-style: none; padding: 0; font-size: 13px;">
-                    <li style="padding: 12px 0; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between;">
-                        <span>Transferencia a Juan Pérez</span>
-                        <span style="color: #ef4444; font-weight: 700;">-$50.000</span>
-                    </li>
+                <ul id="lista-movimientos-completa" style="list-style: none; padding: 0; font-size: 13px;">
                     <li style="padding: 12px 0; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between;">
                         <span>Depósito Nómina</span>
                         <span style="color: #10b981; font-weight: 700;">+$650.000</span>
@@ -480,12 +489,11 @@
             </div>
         </div>
 
-        <!-- VISTA 4: VOUCHER / COMPROBANTE -->
+        <!-- 10. VOUCHER / COMPROBANTE -->
         <div id="view-voucher" class="hidden">
-            <!-- Tarjeta Capturable para PNG -->
             <div class="voucher-card" id="voucher-card">
                 <div class="success-icon">✓</div>
-                <div class="voucher-title">Comprobante de Transferencia</div>
+                <div class="voucher-title">Comprobante de Operación</div>
 
                 <table>
                     <tr class="monto-row">
@@ -494,22 +502,18 @@
                     </tr>
                 </table>
 
-                <div style="font-size: 13px; font-weight: 800; color: #0f172a; margin-top: 14px; margin-bottom: 6px;">Destinatario</div>
+                <div style="font-size: 13px; font-weight: 800; color: #0f172a; margin-top: 14px; margin-bottom: 6px;">Detalle de Transacción</div>
                 <table>
                     <tr>
-                        <td class="text-label">Nombre</td>
+                        <td class="text-label">Concepto</td>
+                        <td class="text-value" id="lbl-concepto">Transferencia</td>
+                    </tr>
+                    <tr>
+                        <td class="text-label">Destinatario</td>
                         <td class="text-value" id="lbl-nombre">Juan Pérez</td>
                     </tr>
                     <tr>
-                        <td class="text-label">RUT</td>
-                        <td class="text-value" id="lbl-rut">12.345.678-9</td>
-                    </tr>
-                    <tr>
-                        <td class="text-label">Banco</td>
-                        <td class="text-value" id="lbl-banco">BancoEstado</td>
-                    </tr>
-                    <tr>
-                        <td class="text-label">Cuenta</td>
+                        <td class="text-label">Cuenta / Destino</td>
                         <td class="text-value" id="lbl-cuenta">12345678</td>
                     </tr>
                 </table>
@@ -517,7 +521,7 @@
                 <div style="font-size: 13px; font-weight: 800; color: #0f172a; margin-top: 14px; margin-bottom: 6px;">Cuenta de origen</div>
                 <table>
                     <tr>
-                        <td class="text-label" style="vertical-align: top;">Cuenta</td>
+                        <td class="text-label" style="vertical-align: top;">Titular</td>
                         <td class="text-value">
                             Felipe Quinteros<br/>
                             Cuenta Vista<br/>
@@ -531,7 +535,7 @@
                 <table>
                     <tr>
                         <td class="text-label">Fecha y hora</td>
-                        <td class="text-value" id="lbl-fecha">28/09/2026 - 19:10</td>
+                        <td class="text-value" id="lbl-fecha">28/09/2026 - 19:30</td>
                     </tr>
                     <tr>
                         <td class="text-label">N° de operación</td>
@@ -540,14 +544,21 @@
                 </table>
             </div>
 
-            <!-- Botones de Acción -->
+            <!-- Botones de Acción del Voucher -->
             <div class="voucher-actions">
+                <!-- 1. Imprimir -->
                 <button class="btn btn-print" onclick="imprimirVoucher()">
                     🖨️ Imprimir voucher
                 </button>
+                <!-- 2. Guardar PNG -->
                 <button class="btn btn-png" onclick="guardarVoucherPng()">
                     📥 Guardar voucher en PNG
                 </button>
+                <!-- 3. Enviar por Correo -->
+                <button class="btn btn-email" onclick="enviarPorCorreo()">
+                    ✉️ Enviar por correo
+                </button>
+                <!-- 4. Cerrar -->
                 <button class="btn btn-close" onclick="cerrarVoucher()">
                     ❌ Cerrar voucher
                 </button>
@@ -570,47 +581,144 @@
             <span style="font-size: 18px;">⏱️</span>
             Historial
         </button>
-        <button class="nav-item" onclick="alert('Módulo de Seguridad')">
+        <button class="nav-item" id="nav-seguridad" onclick="cambiarVista('seguridad')">
             <span style="font-size: 18px;">🛡️</span>
             Seguridad
         </button>
     </nav>
 
     <script>
+        let saldoActual = 1450000;
+        let historialMovimientos = [
+            { texto: "Depósito Nómina", monto: "+$650.000", tipo: "positivo" }
+        ];
+
+        function actualizarHistorialUI() {
+            const htmlMovs = historialMovimientos.map(m => `
+                <li style="padding: 12px 0; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between;">
+                    <span>${m.texto}</span>
+                    <span style="color: ${m.tipo === 'positivo' ? '#10b981' : '#ef4444'}; font-weight: 700;">${m.monto}</span>
+                </li>
+            `).join('');
+
+            document.getElementById('lista-actividades-home').innerHTML = historialMovimientos.length ? htmlMovs : '<div style="font-size: 13px; color: #64748b; text-align: center; padding: 10px 0;">Sin movimientos recientes</div>';
+            document.getElementById('lista-movimientos-completa').innerHTML = htmlMovs;
+        }
+
         function cambiarVista(vista) {
-            document.getElementById('view-inicio').classList.add('hidden');
-            document.getElementById('view-transferir').classList.add('hidden');
-            document.getElementById('view-movimientos').classList.add('hidden');
-            document.getElementById('view-voucher').classList.add('hidden');
+            const vistas = ['inicio', 'transferir', 'servicios', 'recargas', 'tarjetas', 'qr', 'avances', 'seguridad', 'movimientos', 'voucher'];
+            vistas.forEach(v => {
+                const el = document.getElementById('view-' + v);
+                if (el) el.classList.add('hidden');
+            });
 
-            document.getElementById('nav-inicio').classList.remove('active');
-            document.getElementById('nav-transferir').classList.remove('active');
-            document.getElementById('nav-movimientos').classList.remove('active');
+            ['inicio', 'transferir', 'movimientos', 'seguridad'].forEach(n => {
+                const navBtn = document.getElementById('nav-' + n);
+                if (navBtn) navBtn.classList.remove('active');
+            });
 
-            if (vista === 'inicio') {
-                document.getElementById('view-inicio').classList.remove('hidden');
-                document.getElementById('nav-inicio').classList.add('active');
-            } else if (vista === 'transferir') {
-                document.getElementById('view-transferir').classList.remove('hidden');
-                document.getElementById('nav-transferir').classList.add('active');
-            } else if (vista === 'movimientos') {
-                document.getElementById('view-movimientos').classList.remove('hidden');
-                document.getElementById('nav-movimientos').classList.add('active');
+            const destino = document.getElementById('view-' + vista);
+            if (destino) destino.classList.remove('hidden');
+
+            if (['inicio', 'transferir', 'movimientos', 'seguridad'].includes(vista)) {
+                const btnNav = document.getElementById('nav-' + vista);
+                if (btnNav) btnNav.classList.add('active');
             }
         }
 
-        function simularTransferencia() {
-            document.getElementById('lbl-monto').innerText = "$" + document.getElementById('input-monto').value;
-            document.getElementById('lbl-nombre').innerText = document.getElementById('input-nombre').value;
-            document.getElementById('lbl-rut').innerText = document.getElementById('input-rut').value;
-            document.getElementById('lbl-banco').innerText = document.getElementById('input-banco').value;
-            document.getElementById('lbl-cuenta').innerText = document.getElementById('input-cuenta').value;
+        function mostrarVoucher(concepto, montoNum, nombreDest, cuentaDest) {
+            document.getElementById('lbl-concepto').innerText = concepto;
+            document.getElementById('lbl-monto').innerText = "$" + montoNum.toLocaleString('es-CL');
+            document.getElementById('lbl-nombre').innerText = nombreDest;
+            document.getElementById('lbl-cuenta').innerText = cuentaDest;
             
             document.getElementById('lbl-operacion').innerText = Math.floor(100000 + Math.random() * 900000);
 
+            const ahora = new Date();
+            document.getElementById('lbl-fecha').innerText = ahora.toLocaleDateString('es-CL') + " - " + ahora.toLocaleTimeString('es-CL', {hour: '2-digit', minute:'2-digit'});
+
             document.getElementById('bottom-nav').style.display = 'none';
-            document.getElementById('view-transferir').classList.add('hidden');
-            document.getElementById('view-voucher').classList.remove('hidden');
+            cambiarVista('voucher');
+        }
+
+        function procesarTransferencia() {
+            const monto = parseInt(document.getElementById('input-monto').value) || 0;
+            const nombre = document.getElementById('input-nombre').value;
+            const cuenta = document.getElementById('input-cuenta').value;
+
+            if (monto <= 0) {
+                alert("Ingrese un monto válido.");
+                return;
+            }
+
+            saldoActual -= monto;
+            document.getElementById('lbl-saldo').innerText = "$" + saldoActual.toLocaleString('es-CL');
+
+            historialMovimientos.unshift({
+                texto: `Transferencia a ${nombre}`,
+                monto: `-$${monto.toLocaleString('es-CL')}`,
+                tipo: 'negativo'
+            });
+            actualizarHistorialUI();
+
+            mostrarVoucher("Transferencia Bancaria", monto, nombre, cuenta);
+        }
+
+        function pagarServicio() {
+            const empresa = document.getElementById('serv-empresa').value;
+            const monto = parseInt(document.getElementById('serv-monto').value) || 0;
+            const cliente = document.getElementById('serv-cliente').value || "N/A";
+
+            if (monto <= 0) { alert("Ingrese un monto válido."); return; }
+
+            saldoActual -= monto;
+            document.getElementById('lbl-saldo').innerText = "$" + saldoActual.toLocaleString('es-CL');
+
+            historialMovimientos.unshift({
+                texto: `Pago ${empresa.split(' ')[0]}`,
+                monto: `-$${monto.toLocaleString('es-CL')}`,
+                tipo: 'negativo'
+            });
+            actualizarHistorialUI();
+
+            mostrarVoucher("Pago de Servicio", monto, empresa, "Cliente: " + cliente);
+        }
+
+        function hacerRecarga() {
+            const comp = document.getElementById('rec-comp').value;
+            const fono = document.getElementById('rec-fono').value || "+569XXXXXXXX";
+            const monto = parseInt(document.getElementById('rec-monto').value) || 0;
+
+            if (monto <= 0) { alert("Ingrese un monto válido."); return; }
+
+            saldoActual -= monto;
+            document.getElementById('lbl-saldo').innerText = "$" + saldoActual.toLocaleString('es-CL');
+
+            historialMovimientos.unshift({
+                texto: `Recarga Celular ${comp}`,
+                monto: `-$${monto.toLocaleString('es-CL')}`,
+                tipo: 'negativo'
+            });
+            actualizarHistorialUI();
+
+            mostrarVoucher("Recarga de Móvil", monto, comp, fono);
+        }
+
+        function pedirAvance() {
+            const monto = parseInt(document.getElementById('av-monto').value) || 0;
+            if (monto <= 0) { alert("Ingrese un monto válido."); return; }
+
+            saldoActual += monto;
+            document.getElementById('lbl-saldo').innerText = "$" + saldoActual.toLocaleString('es-CL');
+
+            historialMovimientos.unshift({
+                texto: `Avance en Efectivo`,
+                monto: `+$${monto.toLocaleString('es-CL')}`,
+                tipo: 'positivo'
+            });
+            actualizarHistorialUI();
+
+            mostrarVoucher("Avance de Efectivo", monto, "Felipe Quinteros", "Cuenta Vista");
         }
 
         function imprimirVoucher() {
@@ -627,11 +735,22 @@
             });
         }
 
+        function enviarPorCorreo() {
+            const correo = prompt("Ingrese el correo electrónico para enviar el comprobante:");
+            if (correo && correo.includes("@")) {
+                alert(`¡Comprobante enviado con éxito a ${correo}!`);
+            } else if (correo !== null) {
+                alert("Por favor, ingrese un correo electrónico válido.");
+            }
+        }
+
         function cerrarVoucher() {
-            document.getElementById('view-voucher').classList.add('hidden');
             document.getElementById('bottom-nav').style.display = 'flex';
             cambiarVista('inicio');
         }
+
+        // Inicializar historial al cargar
+        actualizarHistorialUI();
     </script>
 </body>
 </html>
