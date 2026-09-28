@@ -52,16 +52,8 @@
             font-size: 15px;
         }
 
-        .user-text .welcome {
-            font-size: 12px;
-            color: #64748b;
-        }
-
-        .user-text .name {
-            font-size: 16px;
-            font-weight: 700;
-            color: #0f172a;
-        }
+        .user-text .welcome { font-size: 12px; color: #64748b; }
+        .user-text .name { font-size: 16px; font-weight: 700; color: #0f172a; }
 
         .notification-btn {
             background: #f1f5f9;
@@ -127,6 +119,9 @@
             color: #0f172a;
             margin-bottom: 15px;
             margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .services-grid {
@@ -174,6 +169,61 @@
             margin-bottom: 15px;
             position: relative;
         }
+
+        /* Estilo de Tarjeta de Actividad / Movimiento con Botón Ver Voucher */
+        .activity-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 14px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .activity-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .activity-icon {
+            width: 38px;
+            height: 38px;
+            background: #fef2f2;
+            color: #dc2626;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .activity-details .title { font-size: 14px; font-weight: 700; color: #0f172a; }
+        .activity-details .subtitle { font-size: 11px; color: #64748b; margin-top: 2px; }
+
+        .activity-right {
+            text-align: right;
+        }
+
+        .activity-amount { font-size: 14px; font-weight: 800; color: #ef4444; margin-bottom: 6px; }
+        .activity-amount.positive { color: #10b981; }
+
+        .btn-ver-voucher {
+            background-color: #0052cc;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .btn-ver-voucher:hover { background-color: #0041a8; }
 
         /* Formularios */
         .form-group { margin-bottom: 15px; }
@@ -336,13 +386,16 @@
                 </div>
             </div>
 
-            <div class="section-title">Últimas Actividades</div>
-            <div class="card-box" id="lista-actividades-home">
-                <div style="font-size: 13px; color: #64748b; text-align: center; padding: 10px 0;">Sin movimientos recientes</div>
+            <div class="section-title">
+                Últimas Actividades
+                <span style="font-size: 12px; color: #2563eb; cursor: pointer;" onclick="cambiarVista('movimientos')">Ver todo</span>
+            </div>
+            <div id="lista-actividades-home">
+                <!-- Se llena dinámicamente -->
             </div>
         </div>
 
-        <!-- 2. TRANSFERIR (Exacto a tu diseño de imagen) -->
+        <!-- 2. TRANSFERIR -->
         <div id="view-transferir" class="hidden">
             <div class="card-box">
                 <button onclick="cambiarVista('inicio')" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 18px; cursor: pointer; color: #64748b;">✕</button>
@@ -404,19 +457,23 @@
                 <div class="form-group">
                     <label>Seleccionar Empresa</label>
                     <select id="serv-empresa">
-                        <option>CGE Distribución (Electricidad)</option>
-                        <option>Nuevo Sur (Agua Potable)</option>
-                        <option>Entel / Movistar (Internet y Telefonía)</option>
-                        <option>Gasco / Abastible (Gas)</option>
+                        <option>Enel Distribución</option>
+                        <option>Nuevo Sur (Agua)</option>
+                        <option>Entel / Movistar</option>
+                        <option>Gasco</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Número de Cliente o Medidor</label>
-                    <input type="text" id="serv-cliente" placeholder="Ej: 9876543">
+                    <label>Correo Electrónico Destinatario / Empresa (Opcional)</label>
+                    <input type="email" id="serv-email" value="contacto@enel.cl">
+                </div>
+                <div class="form-group">
+                    <label>Número de Cliente</label>
+                    <input type="text" id="serv-cliente" value="9876543">
                 </div>
                 <div class="form-group">
                     <label>Monto a Pagar ($)</label>
-                    <input type="number" id="serv-monto" value="18500">
+                    <input type="number" id="serv-monto" value="67000">
                 </div>
                 <button class="btn-primary" onclick="pagarServicio()">Pagar Cuenta</button>
             </div>
@@ -437,8 +494,12 @@
                     </select>
                 </div>
                 <div class="form-group">
+                    <label>Correo Electrónico (Opcional)</label>
+                    <input type="email" id="rec-email" value="recargas@movistar.cl">
+                </div>
+                <div class="form-group">
                     <label>Número de Teléfono</label>
-                    <input type="text" id="rec-fono" placeholder="+569...">
+                    <input type="text" id="rec-fono" value="+56912345678">
                 </div>
                 <div class="form-group">
                     <label>Monto de Recarga ($)</label>
@@ -498,6 +559,7 @@
         <!-- 8. SEGURIDAD -->
         <div id="view-seguridad" class="hidden">
             <div class="card-box">
+                <button onclick="cambiarVista('inicio')" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 18px; cursor: pointer; color: #64748b;">✕</button>
                 <h2 style="font-size: 16px; margin-bottom: 15px; text-align: center;">Configuración de Seguridad</h2>
                 <div style="font-size: 13px; margin-bottom: 15px;">
                     <p style="margin-bottom: 10px;">🔒 <b>Bloqueo Biométrico:</b> Activado</p>
@@ -512,20 +574,17 @@
         <div id="view-movimientos" class="hidden">
             <div class="card-box">
                 <h2 style="font-size: 16px; margin-bottom: 15px;">Historial de Movimientos</h2>
-                <ul id="lista-movimientos-completa" style="list-style: none; padding: 0; font-size: 13px;">
-                    <li style="padding: 12px 0; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between;">
-                        <span>Depósito Nómina</span>
-                        <span style="color: #10b981; font-weight: 700;">+$650.000</span>
-                    </li>
-                </ul>
+                <div id="lista-movimientos-completa">
+                    <!-- Se llena dinámicamente -->
+                </div>
             </div>
         </div>
 
-        <!-- 10. VOUCHER / COMPROBANTE CON CORREO -->
+        <!-- 10. VOUCHER / COMPROBANTE -->
         <div id="view-voucher" class="hidden">
             <div class="voucher-card" id="voucher-card">
                 <div class="success-icon">✓</div>
-                <div class="voucher-title">Comprobante de Transferencia</div>
+                <div class="voucher-title">Comprobante de Operación</div>
 
                 <table>
                     <tr class="monto-row">
@@ -534,31 +593,23 @@
                     </tr>
                 </table>
 
-                <div style="font-size: 13px; font-weight: 800; color: #0f172a; margin-top: 14px; margin-bottom: 6px;">Destinatario</div>
+                <div style="font-size: 13px; font-weight: 800; color: #0f172a; margin-top: 14px; margin-bottom: 6px;">Detalle</div>
                 <table>
                     <tr>
-                        <td class="text-label">Nombre</td>
+                        <td class="text-label">Concepto</td>
+                        <td class="text-value" id="lbl-concepto">Transferencia</td>
+                    </tr>
+                    <tr>
+                        <td class="text-label">Destinatario</td>
                         <td class="text-value" id="lbl-nombre">Juan Pérez</td>
                     </tr>
                     <tr>
-                        <td class="text-label">RUT</td>
-                        <td class="text-value" id="lbl-rut">12.345.678-9</td>
-                    </tr>
-                    <tr>
-                        <td class="text-label">Correo</td>
+                        <td class="text-label">Correo Destino</td>
                         <td class="text-value" id="lbl-correo">destinatario@ejemplo.com</td>
                     </tr>
                     <tr>
-                        <td class="text-label">Banco / Tipo</td>
-                        <td class="text-value" id="lbl-banco-tipo">BancoEstado - CuentaRUT</td>
-                    </tr>
-                    <tr>
-                        <td class="text-label">N° de Cuenta</td>
+                        <td class="text-label">Referencia / Cuenta</td>
                         <td class="text-value" id="lbl-cuenta">12345678</td>
-                    </tr>
-                    <tr>
-                        <td class="text-label">Asunto</td>
-                        <td class="text-value" id="lbl-asunto">Pago de servicios</td>
                     </tr>
                 </table>
 
@@ -596,8 +647,8 @@
                 <button class="btn btn-png" onclick="guardarVoucherPng()">
                     📥 Guardar voucher en PNG
                 </button>
-                <button class="btn btn-email" onclick="enviarPorCorreo()">
-                    ✉️ Enviar por correo
+                <button class="btn btn-email" onclick="enviarPorCorreoReal()">
+                    ✉️ Enviar por correo al destinatario
                 </button>
                 <button class="btn btn-close" onclick="cerrarVoucher()">
                     ❌ Cerrar voucher
@@ -630,20 +681,56 @@
     <script>
         let saldoActual = 1450000;
         let historialMovimientos = [
-            { texto: "Depósito Nómina", monto: "+$650.000", tipo: "positivo" }
+            {
+                concepto: "Pago de Servicios",
+                texto: "Enel Distribución",
+                monto: "-$67.000",
+                montoNum: 67000,
+                tipo: "negativo",
+                nombre: "Enel Distribución",
+                correo: "contacto@enel.cl",
+                cuenta: "Cliente: 9876543",
+                fecha: "28-09-2026 18:30:10",
+                operacion: "5938210"
+            },
+            {
+                concepto: "Depósito Nómina",
+                texto: "Depósito Nómina",
+                monto: "+$650.000",
+                montoNum: 650000,
+                tipo: "positivo",
+                nombre: "Felipe Quinteros",
+                correo: "felipe@aegis.cl",
+                cuenta: "00010363459",
+                fecha: "27-09-2026 10:15:00",
+                operacion: "1029384"
+            }
         ];
-        let ultimoCorreoDestino = "";
+
+        let transaccionActual = null;
 
         function actualizarHistorialUI() {
-            const htmlMovs = historialMovimientos.map(m => `
-                <li style="padding: 12px 0; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between;">
-                    <span>${m.texto}</span>
-                    <span style="color: ${m.tipo === 'positivo' ? '#10b981' : '#ef4444'}; font-weight: 700;">${m.monto}</span>
-                </li>
-            `).join('');
+            const generarHTML = (item, index) => `
+                <div class="activity-card">
+                    <div class="activity-info">
+                        <div class="activity-icon">🔄</div>
+                        <div class="activity-details">
+                            <div class="title">${item.texto}</div>
+                            <div class="subtitle">Aegis Pay · ${item.fecha}</div>
+                        </div>
+                    </div>
+                    <div class="activity-right">
+                        <div class="activity-amount ${item.tipo === 'positivo' ? 'positive' : ''}">${item.monto}</div>
+                        <button class="btn-ver-voucher" onclick="verVoucher(${index})">Ver Voucher 📄</button>
+                    </div>
+                </div>
+            `;
 
-            document.getElementById('lista-actividades-home').innerHTML = historialMovimientos.length ? htmlMovs : '<div style="font-size: 13px; color: #64748b; text-align: center; padding: 10px 0;">Sin movimientos recientes</div>';
-            document.getElementById('lista-movimientos-completa').innerHTML = htmlMovs;
+            const htmlHome = historialMovimientos.slice(0, 2).map((item, index) => generarHTML(item, index)).join('');
+            const htmlCompleto = historialMovimientos.map((item, index) => generarHTML(item, index)).join('');
+
+            document.getElementById('lista-actividades-home').innerHTML = htmlHome || '<div style="font-size: 13px; color: #64748b; text-align: center; padding: 10px 0;">Sin movimientos recientes</div>';
+            document.getElementById('lista-movimientos-completa').innerHTML = htmlCompleto || '<div style="font-size: 13px; color: #64748b; text-align: center; padding: 10px 0;">Sin movimientos recientes</div>';
         }
 
         function cambiarVista(vista) {
@@ -667,114 +754,126 @@
             }
         }
 
+        function cargarVoucherEnPantalla(item) {
+            transaccionActual = item;
+            document.getElementById('lbl-concepto').innerText = item.concepto;
+            document.getElementById('lbl-monto').innerText = (item.tipo === 'positivo' ? '+' : '-') + "$" + item.montoNum.toLocaleString('es-CL');
+            document.getElementById('lbl-nombre').innerText = item.nombre;
+            document.getElementById('lbl-correo').innerText = item.correo;
+            document.getElementById('lbl-cuenta').innerText = item.cuenta;
+            document.getElementById('lbl-fecha').innerText = item.fecha;
+            document.getElementById('lbl-operacion').innerText = item.operacion;
+
+            document.getElementById('bottom-nav').style.display = 'none';
+            cambiarVista('voucher');
+        }
+
+        function verVoucher(index) {
+            const item = historialMovimientos[index];
+            if (item) {
+                cargarVoucherEnPantalla(item);
+            }
+        }
+
         function procesarTransferencia() {
             const monto = parseInt(document.getElementById('input-monto').value) || 0;
             const nombre = document.getElementById('input-nombre').value;
-            const rut = document.getElementById('input-rut').value;
-            const correo = document.getElementById('input-email').value || "No especificado";
+            const correo = document.getElementById('input-email').value || "destinatario@ejemplo.com";
             const banco = document.getElementById('input-banco').value;
             const tipoCuenta = document.getElementById('input-tipo-cuenta').value;
             const cuenta = document.getElementById('input-cuenta').value;
-            const asunto = document.getElementById('input-asunto').value || "Transferencia Aegis";
 
-            if (monto <= 0) {
-                alert("Ingrese un monto válido.");
-                return;
-            }
-
-            ultimoCorreoDestino = document.getElementById('input-email').value;
+            if (monto <= 0) { alert("Ingrese un monto válido."); return; }
 
             saldoActual -= monto;
             document.getElementById('lbl-saldo').innerText = "$" + saldoActual.toLocaleString('es-CL');
 
-            historialMovimientos.unshift({
+            const ahora = new Date();
+            const fechaStr = ahora.toLocaleDateString('es-CL') + " " + ahora.toLocaleTimeString('es-CL', {hour: '2-digit', minute:'2-digit', second:'2-digit'});
+            const opNum = Math.floor(100000 + Math.random() * 900000).toString();
+
+            const nuevoItem = {
+                concepto: "Transferencia Bancaria",
                 texto: `Transferencia a ${nombre}`,
                 monto: `-$${monto.toLocaleString('es-CL')}`,
-                tipo: 'negativo'
-            });
+                montoNum: monto,
+                tipo: "negativo",
+                nombre: nombre,
+                correo: correo,
+                cuenta: `${banco} - ${tipoCuenta} (${cuenta})`,
+                fecha: fechaStr,
+                operacion: opNum
+            };
+
+            historialMovimientos.unshift(nuevoItem);
             actualizarHistorialUI();
-
-            // Inyectar en Voucher
-            document.getElementById('lbl-monto').innerText = "$" + monto.toLocaleString('es-CL');
-            document.getElementById('lbl-nombre').innerText = nombre;
-            document.getElementById('lbl-rut').innerText = rut;
-            document.getElementById('lbl-correo').innerText = correo;
-            document.getElementById('lbl-banco-tipo').innerText = banco + " - " + tipoCuenta;
-            document.getElementById('lbl-cuenta').innerText = cuenta;
-            document.getElementById('lbl-asunto').innerText = asunto;
-            document.getElementById('lbl-operacion').innerText = Math.floor(100000 + Math.random() * 900000);
-
-            const ahora = new Date();
-            document.getElementById('lbl-fecha').innerText = ahora.toLocaleDateString('es-CL') + " - " + ahora.toLocaleTimeString('es-CL', {hour: '2-digit', minute:'2-digit'});
-
-            document.getElementById('bottom-nav').style.display = 'none';
-            cambiarVista('voucher');
+            cargarVoucherEnPantalla(nuevoItem);
         }
 
         function pagarServicio() {
             const empresa = document.getElementById('serv-empresa').value;
             const monto = parseInt(document.getElementById('serv-monto').value) || 0;
-            const cliente = document.getElementById('serv-cliente').value || "N/A";
+            const cliente = document.getElementById('serv-cliente').value || "9876543";
+            const correo = document.getElementById('serv-email').value || "contacto@enel.cl";
 
             if (monto <= 0) { alert("Ingrese un monto válido."); return; }
 
             saldoActual -= monto;
             document.getElementById('lbl-saldo').innerText = "$" + saldoActual.toLocaleString('es-CL');
 
-            historialMovimientos.unshift({
-                texto: `Pago ${empresa.split(' ')[0]}`,
-                monto: `-$${monto.toLocaleString('es-CL')}`,
-                tipo: 'negativo'
-            });
-            actualizarHistorialUI();
-
-            document.getElementById('lbl-monto').innerText = "$" + monto.toLocaleString('es-CL');
-            document.getElementById('lbl-nombre').innerText = empresa;
-            document.getElementById('lbl-rut').innerText = "N/A";
-            document.getElementById('lbl-correo').innerText = "No especificado";
-            document.getElementById('lbl-banco-tipo').innerText = "Servicios Básicos";
-            document.getElementById('lbl-cuenta').innerText = "Cliente: " + cliente;
-            document.getElementById('lbl-asunto').innerText = "Pago de cuenta";
-            document.getElementById('lbl-operacion').innerText = Math.floor(100000 + Math.random() * 900000);
-
             const ahora = new Date();
-            document.getElementById('lbl-fecha').innerText = ahora.toLocaleDateString('es-CL') + " - " + ahora.toLocaleTimeString('es-CL', {hour: '2-digit', minute:'2-digit'});
+            const fechaStr = ahora.toLocaleDateString('es-CL') + " " + ahora.toLocaleTimeString('es-CL', {hour: '2-digit', minute:'2-digit', second:'2-digit'});
+            const opNum = Math.floor(100000 + Math.random() * 900000).toString();
 
-            document.getElementById('bottom-nav').style.display = 'none';
-            cambiarVista('voucher');
+            const nuevoItem = {
+                concepto: "Pago de Servicios",
+                texto: empresa,
+                monto: `-$${monto.toLocaleString('es-CL')}`,
+                montoNum: monto,
+                tipo: "negativo",
+                nombre: empresa,
+                correo: correo,
+                cuenta: `Cliente: ${cliente}`,
+                fecha: fechaStr,
+                operacion: opNum
+            };
+
+            historialMovimientos.unshift(nuevoItem);
+            actualizarHistorialUI();
+            cargarVoucherEnPantalla(nuevoItem);
         }
 
         function hacerRecarga() {
             const comp = document.getElementById('rec-comp').value;
-            const fono = document.getElementById('rec-fono').value || "+569XXXXXXXX";
+            const fono = document.getElementById('rec-fono').value || "+56912345678";
             const monto = parseInt(document.getElementById('rec-monto').value) || 0;
+            const correo = document.getElementById('rec-email').value || "recargas@movistar.cl";
 
             if (monto <= 0) { alert("Ingrese un monto válido."); return; }
 
             saldoActual -= monto;
             document.getElementById('lbl-saldo').innerText = "$" + saldoActual.toLocaleString('es-CL');
 
-            historialMovimientos.unshift({
-                texto: `Recarga Celular ${comp}`,
-                monto: `-$${monto.toLocaleString('es-CL')}`,
-                tipo: 'negativo'
-            });
-            actualizarHistorialUI();
-
-            document.getElementById('lbl-monto').innerText = "$" + monto.toLocaleString('es-CL');
-            document.getElementById('lbl-nombre').innerText = "Recarga " + comp;
-            document.getElementById('lbl-rut').innerText = "N/A";
-            document.getElementById('lbl-correo').innerText = "No especificado";
-            document.getElementById('lbl-banco-tipo').innerText = "Telefonía Móvil";
-            document.getElementById('lbl-cuenta').innerText = fono;
-            document.getElementById('lbl-asunto').innerText = "Recarga de saldo";
-            document.getElementById('lbl-operacion').innerText = Math.floor(100000 + Math.random() * 900000);
-
             const ahora = new Date();
-            document.getElementById('lbl-fecha').innerText = ahora.toLocaleDateString('es-CL') + " - " + ahora.toLocaleTimeString('es-CL', {hour: '2-digit', minute:'2-digit'});
+            const fechaStr = ahora.toLocaleDateString('es-CL') + " " + ahora.toLocaleTimeString('es-CL', {hour: '2-digit', minute:'2-digit', second:'2-digit'});
+            const opNum = Math.floor(100000 + Math.random() * 900000).toString();
 
-            document.getElementById('bottom-nav').style.display = 'none';
-            cambiarVista('voucher');
+            const nuevoItem = {
+                concepto: "Recarga Móvil",
+                texto: `Recarga ${comp}`,
+                monto: `-$${monto.toLocaleString('es-CL')}`,
+                montoNum: monto,
+                tipo: "negativo",
+                nombre: `Recarga ${comp}`,
+                correo: correo,
+                cuenta: fono,
+                fecha: fechaStr,
+                operacion: opNum
+            };
+
+            historialMovimientos.unshift(nuevoItem);
+            actualizarHistorialUI();
+            cargarVoucherEnPantalla(nuevoItem);
         }
 
         function pedirAvance() {
@@ -784,27 +883,26 @@
             saldoActual += monto;
             document.getElementById('lbl-saldo').innerText = "$" + saldoActual.toLocaleString('es-CL');
 
-            historialMovimientos.unshift({
-                texto: `Avance en Efectivo`,
-                monto: `+$${monto.toLocaleString('es-CL')}`,
-                tipo: 'positivo'
-            });
-            actualizarHistorialUI();
-
-            document.getElementById('lbl-monto').innerText = "$" + monto.toLocaleString('es-CL');
-            document.getElementById('lbl-nombre').innerText = "Felipe Quinteros";
-            document.getElementById('lbl-rut').innerText = "10.234.567-8";
-            document.getElementById('lbl-correo').innerText = "felipe@aegis.cl";
-            document.getElementById('lbl-banco-tipo').innerText = "Cuenta Vista - Avance";
-            document.getElementById('lbl-cuenta').innerText = "00010363459";
-            document.getElementById('lbl-asunto').innerText = "Avance de efectivo";
-            document.getElementById('lbl-operacion').innerText = Math.floor(100000 + Math.random() * 900000);
-
             const ahora = new Date();
-            document.getElementById('lbl-fecha').innerText = ahora.toLocaleDateString('es-CL') + " - " + ahora.toLocaleTimeString('es-CL', {hour: '2-digit', minute:'2-digit'});
+            const fechaStr = ahora.toLocaleDateString('es-CL') + " " + ahora.toLocaleTimeString('es-CL', {hour: '2-digit', minute:'2-digit', second:'2-digit'});
+            const opNum = Math.floor(100000 + Math.random() * 900000).toString();
 
-            document.getElementById('bottom-nav').style.display = 'none';
-            cambiarVista('voucher');
+            const nuevoItem = {
+                concepto: "Avance en Efectivo",
+                texto: "Avance Aegis Pay",
+                monto: `+$${monto.toLocaleString('es-CL')}`,
+                montoNum: monto,
+                tipo: "positivo",
+                nombre: "Felipe Quinteros",
+                correo: "felipe@aegis.cl",
+                cuenta: "Cuenta Vista 00010363459",
+                fecha: fechaStr,
+                operacion: opNum
+            };
+
+            historialMovimientos.unshift(nuevoItem);
+            actualizarHistorialUI();
+            cargarVoucherEnPantalla(nuevoItem);
         }
 
         function imprimirVoucher() {
@@ -821,16 +919,25 @@
             });
         }
 
-        function enviarPorCorreo() {
-            let correoDestino = ultimoCorreoDestino;
-            if (!correoDestino) {
-                correoDestino = prompt("Ingrese el correo electrónico para enviar el comprobante:");
-            }
-            if (correoDestino && correoDestino.includes("@")) {
-                alert(`¡Comprobante enviado exitosamente a ${correoDestino}!`);
-            } else {
-                alert("Por favor, ingrese un correo electrónico válido.");
-            }
+        // Envío real al correo del destinatario mediante mailto preconfigurado
+        function enviarPorCorreoReal() {
+            if (!transaccionActual) return;
+            const correoDestino = transaccionActual.correo;
+            const asunto = encodeURIComponent("Comprobante de Operación - Aegis Company Digital");
+            const cuerpo = encodeURIComponent(
+                `Hola ${transaccionActual.nombre},\n\n` +
+                `Se ha generado un comprobante de operación a tu nombre desde Aegis Company Digital.\n\n` +
+                `--- DETALLES DE LA TRANSACCIÓN ---\n` +
+                `Concepto: ${transaccionActual.concepto}\n` +
+                `Monto: ${transaccionActual.monto}\n` +
+                `Fecha y Hora: ${transaccionActual.fecha}\n` +
+                `N° de Operación: ${transaccionActual.operacion}\n` +
+                `Origen: Felipe Quinteros (Cuenta Vista 00010363459)\n\n` +
+                `Atentamente,\nAegis Company Digital`
+            );
+
+            // Abre el cliente de correo del emisor directo al correo del destinatario
+            window.location.href = `mailto:${correoDestino}?subject=${asunto}&body=${cuerpo}`;
         }
 
         function cerrarVoucher() {
