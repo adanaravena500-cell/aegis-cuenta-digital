@@ -20,110 +20,199 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            padding-bottom: 70px; /* Espacio para la barra inferior */
         }
 
-        /* Barra superior / Header */
-        header {
-            background-color: #0f172a;
-            color: white;
+        /* Cabecera de Usuario */
+        .app-header {
+            background-color: #ffffff;
             padding: 15px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        header h1 {
-            font-size: 18px;
-            font-weight: 700;
-        }
-
-        /* Menú de navegación inferior o pestañas */
-        nav {
-            background-color: #ffffff;
-            display: flex;
-            justify-content: space-around;
             border-bottom: 1px solid #e2e8f0;
-            padding: 10px 0;
         }
 
-        nav button {
-            background: none;
-            border: none;
-            font-size: 13px;
-            font-weight: 600;
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-avatar {
+            width: 42px;
+            height: 42px;
+            background-color: #1d4ed8;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .user-text .welcome {
+            font-size: 12px;
             color: #64748b;
-            cursor: pointer;
-            padding: 6px 12px;
-            border-radius: 6px;
         }
 
-        nav button.active {
-            color: #2563eb;
-            background-color: #eff6ff;
+        .user-text .name {
+            font-size: 16px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .notification-btn {
+            background: #f1f5f9;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 16px;
         }
 
         /* Contenedor principal */
-        .main-container {
-            flex: 1;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-        }
-
-        .card {
+        .container {
             width: 100%;
             max-width: 420px;
-            background: #ffffff;
-            border-radius: 16px;
-            padding: 25px 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            margin-bottom: 20px;
+            margin: 0 auto;
+            padding: 20px;
         }
 
-        h2 {
+        /* Tarjeta de Cuenta Azul */
+        .debit-card {
+            background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 8px 20px rgba(29, 78, 216, 0.25);
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .debit-card .card-type {
+            font-size: 13px;
+            color: #bfdbfe;
+            font-weight: 500;
+        }
+
+        .debit-card .balance-label {
+            font-size: 12px;
+            color: #93c5fd;
+            margin-top: 12px;
+        }
+
+        .debit-card .balance-amount {
+            font-size: 28px;
+            font-weight: 800;
+            margin-top: 2px;
+        }
+
+        .debit-card .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .debit-card .card-number {
+            font-size: 14px;
+            letter-spacing: 2px;
+            color: #e0e7ff;
+        }
+
+        .debit-card .visa-logo {
+            font-weight: 800;
+            font-style: italic;
+            font-size: 16px;
+            letter-spacing: 1px;
+        }
+
+        /* Botón Fintoc */
+        .btn-fintoc {
+            width: 100%;
+            background-color: #1d4ed8;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(29, 78, 216, 0.15);
+            margin-bottom: 25px;
+        }
+
+        /* Sección de Servicios */
+        .section-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 15px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .service-item {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 12px 6px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .service-item:hover {
+            border-color: #2563eb;
+            transform: translateY(-2px);
+        }
+
+        .service-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 18px;
-            color: #1e293b;
-            margin-bottom: 20px;
+            margin-bottom: 6px;
+        }
+
+        .service-text {
+            font-size: 11px;
+            font-weight: 600;
+            color: #334155;
             text-align: center;
         }
 
-        /* Tarjeta de Cuenta en Inicio */
-        .account-card {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            color: white;
-            border-radius: 12px;
+        /* Actividades recientes */
+        .card-box {
+            background: #ffffff;
+            border-radius: 16px;
             padding: 20px;
-            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            border: 1px solid #e2e8f0;
         }
 
-        .account-card .label {
-            font-size: 12px;
-            color: #94a3b8;
-        }
-
-        .account-card .name {
-            font-size: 16px;
-            font-weight: 700;
-            margin-top: 4px;
-        }
-
-        .account-card .number {
-            font-size: 14px;
-            letter-spacing: 1px;
-            margin-top: 2px;
-            color: #cbd5e1;
-        }
-
-        .account-card .balance {
-            font-size: 24px;
-            font-weight: 800;
-            margin-top: 15px;
-            color: #34d399;
-        }
-
-        /* Formularios */
+        /* Formularios y vistas internas */
         .form-group {
             margin-bottom: 15px;
         }
@@ -156,9 +245,16 @@
             cursor: pointer;
             margin-top: 10px;
         }
-        .btn-primary:hover { background-color: #1d4ed8; }
 
-        /* Estilos del Voucher */
+        /* Voucher / Comprobante Estilos */
+        .voucher-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 25px 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 15px;
+        }
+
         .success-icon {
             width: 48px;
             height: 48px;
@@ -173,20 +269,12 @@
             margin: 0 auto 12px auto;
         }
 
-        .title {
+        .voucher-title {
             text-align: center;
             font-size: 18px;
             font-weight: 700;
             color: #1e293b;
             margin-bottom: 22px;
-        }
-
-        .section-title {
-            font-size: 14px;
-            font-weight: 800;
-            color: #0f172a;
-            margin-top: 14px;
-            margin-bottom: 6px;
         }
 
         table {
@@ -199,21 +287,9 @@
             padding-bottom: 6px;
         }
 
-        .text-label {
-            color: #64748b;
-        }
-
-        .text-value {
-            color: #0f172a;
-            font-weight: 700;
-            text-align: right;
-        }
-
-        .monto-row td {
-            font-size: 20px;
-            font-weight: 800;
-            color: #0f172a;
-        }
+        .text-label { color: #64748b; }
+        .text-value { color: #0f172a; font-weight: 700; text-align: right; }
+        .monto-row td { font-size: 20px; font-weight: 800; color: #0f172a; }
 
         .divider {
             border: none;
@@ -223,7 +299,6 @@
 
         /* Botones de acción del Voucher */
         .voucher-actions {
-            margin-top: 20px;
             display: flex;
             flex-direction: column;
             gap: 10px;
@@ -244,96 +319,173 @@
         }
 
         .btn-print { background-color: #0f172a; color: white; }
-        .btn-print:hover { background-color: #1e293b; }
-
         .btn-png { background-color: #059669; color: white; }
-        .btn-png:hover { background-color: #047857; }
-
         .btn-close { background-color: #ef4444; color: white; }
-        .btn-close:hover { background-color: #dc2626; }
+
+        /* Barra de navegación inferior móvil */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #ffffff;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.03);
+            z-index: 100;
+        }
+
+        .nav-item {
+            background: none;
+            border: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 11px;
+            font-weight: 600;
+            color: #64748b;
+            cursor: pointer;
+        }
+
+        .nav-item.active {
+            color: #2563eb;
+        }
 
         .hidden { display: none; }
     </style>
 </head>
 <body>
 
-    <!-- Header de la Aplicación -->
-    <header>
-        <h1>Aegis Company Digital</h1>
-        <span style="font-size: 12px; color: #94a3b8;">Portal Seguro</span>
-    </header>
-
-    <!-- Menú de Navegación -->
-    <nav id="app-nav">
-        <button id="nav-inicio" class="active" onclick="cambiarVista('inicio')">🏠 Inicio</button>
-        <button id="nav-transferir" onclick="cambiarVista('transferir')">💸 Transferir</button>
-        <button id="nav-movimientos" onclick="cambiarVista('movimientos')">📋 Movimientos</button>
-    </nav>
+    <!-- Cabecera -->
+    <div class="app-header">
+        <div class="user-info">
+            <div class="user-avatar">VA</div>
+            <div class="user-text">
+                <div class="welcome">Bienvenido de nuevo</div>
+                <div class="name">Felipe Quinteros</div>
+            </div>
+        </div>
+        <button class="notification-btn">🔔</button>
+    </div>
 
     <!-- Contenedor Principal -->
-    <div class="main-container">
+    <div class="container">
 
-        <!-- VISTA 1: Pantalla de Inicio / Dashboard -->
-        <div class="card" id="view-inicio">
-            <h2>Resumen de Cuenta</h2>
-            <div class="account-card">
-                <div class="label">Titular</div>
-                <div class="name">Felipe Quinteros</div>
-                <div class="label" style="margin-top: 10px;">Cuenta Vista</div>
-                <div class="number">N° 00010363459</div>
-                <div class="balance">$1.450.000</div>
+        <!-- VISTA 1: INICIO (Dashboard Completo) -->
+        <div id="view-inicio">
+            <!-- Tarjeta de Cuenta -->
+            <div class="debit-card">
+                <div class="card-type">Cuenta Vista / Débito</div>
+                <div class="balance-label">Saldo Disponible</div>
+                <div class="balance-amount">$1.450.000</div>
+                <div class="card-footer">
+                    <div class="card-number">**** **** **** 5678</div>
+                    <div class="visa-logo">VISA</div>
+                </div>
             </div>
-            <button class="btn-primary" onclick="cambiarVista('transferir')">Realizar Nueva Transferencia</button>
+
+            <button class="btn-fintoc">
+                🔗 Conectar Banco con Fintoc
+            </button>
+
+            <div class="section-title">Servicios y Operaciones</div>
+            
+            <!-- Grilla de 8 Servicios -->
+            <div class="services-grid">
+                <div class="service-item" onclick="alert('Módulo de Servicios')">
+                    <div class="service-icon" style="background: #eff6ff; color: #2563eb;">📄</div>
+                    <div class="service-text">Pagar Servicios</div>
+                </div>
+                <div class="service-item" onclick="cambiarVista('transferir')">
+                    <div class="service-icon" style="background: #f0fdf4; color: #16a34a;">🔄</div>
+                    <div class="service-text">Transferir</div>
+                </div>
+                <div class="service-item" onclick="cambiarVista('movimientos')">
+                    <div class="service-icon" style="background: #faf5ff; color: #9333ea;">⏱️</div>
+                    <div class="service-text">Movimientos</div>
+                </div>
+                <div class="service-item" onclick="alert('Módulo de Recargas')">
+                    <div class="service-icon" style="background: #fff7ed; color: #ea580c;">📱</div>
+                    <div class="service-text">Recargas</div>
+                </div>
+                <div class="service-item" onclick="alert('Módulo de Tarjetas')">
+                    <div class="service-icon" style="background: #fef2f2; color: #dc2626;">💳</div>
+                    <div class="service-text">Mis Tarjetas</div>
+                </div>
+                <div class="service-item" onclick="alert('Módulo Pago QR')">
+                    <div class="service-icon" style="background: #ecfdf5; color: #059669;">📱</div>
+                    <div class="service-text">Pago QR</div>
+                </div>
+                <div class="service-item" onclick="alert('Módulo Avances')">
+                    <div class="service-icon" style="background: #fefce8; color: #ca8a04;">💵</div>
+                    <div class="service-text">Avances</div>
+                </div>
+                <div class="service-item" onclick="alert('Módulo Seguridad')">
+                    <div class="service-icon" style="background: #f0fdfa; color: #0d9488;">🛡️</div>
+                    <div class="service-text">Seguridad</div>
+                </div>
+            </div>
+
+            <!-- Últimas actividades -->
+            <div class="section-title">Últimas Actividades</div>
+            <div class="card-box">
+                <div style="font-size: 13px; color: #64748b; text-align: center; padding: 10px 0;">Sin movimientos recientes</div>
+            </div>
         </div>
 
-        <!-- VISTA 2: Formulario de Transferencia -->
-        <div class="card hidden" id="view-transferir">
-            <h2>Nueva Transferencia</h2>
-            <div class="form-group">
-                <label>Monto a transferir ($)</label>
-                <input type="text" id="input-monto" value="50.000">
+        <!-- VISTA 2: TRANSFERIR (Formulario) -->
+        <div id="view-transferir" class="hidden">
+            <div class="card-box">
+                <h2 style="font-size: 16px; margin-bottom: 15px; text-align: center;">Realizar Transferencia</h2>
+                <div class="form-group">
+                    <label>Monto a transferir ($)</label>
+                    <input type="text" id="input-monto" value="50.000">
+                </div>
+                <div class="form-group">
+                    <label>Nombre del Destinatario</label>
+                    <input type="text" id="input-nombre" value="Juan Pérez">
+                </div>
+                <div class="form-group">
+                    <label>RUT del Destinatario</label>
+                    <input type="text" id="input-rut" value="12.345.678-9">
+                </div>
+                <div class="form-group">
+                    <label>Banco</label>
+                    <input type="text" id="input-banco" value="BancoEstado">
+                </div>
+                <div class="form-group">
+                    <label>Número de Cuenta</label>
+                    <input type="text" id="input-cuenta" value="12345678">
+                </div>
+                <button class="btn-primary" onclick="simularTransferencia()">Generar Comprobante</button>
             </div>
-            <div class="form-group">
-                <label>Nombre del Destinatario</label>
-                <input type="text" id="input-nombre" value="Juan Pérez">
-            </div>
-            <div class="form-group">
-                <label>RUT del Destinatario</label>
-                <input type="text" id="input-rut" value="12.345.678-9">
-            </div>
-            <div class="form-group">
-                <label>Banco</label>
-                <input type="text" id="input-banco" value="BancoEstado">
-            </div>
-            <div class="form-group">
-                <label>Número de Cuenta</label>
-                <input type="text" id="input-cuenta" value="12345678">
-            </div>
-            <button class="btn-primary" onclick="simularTransferencia()">Generar Comprobante</button>
         </div>
 
-        <!-- VISTA 3: Historial de Movimientos -->
-        <div class="card hidden" id="view-movimientos">
-            <h2>Últimos Movimientos</h2>
-            <div style="font-size: 13px; color: #64748b; margin-bottom: 10px;">Actividad reciente de la cuenta:</div>
-            <ul style="list-style: none; padding: 0;">
-                <li style="padding: 10px 0; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between;">
-                    <span>Transferencia a Juan Pérez</span>
-                    <span style="color: #ef4444; font-weight: 700;">-$50.000</span>
-                </li>
-                <li style="padding: 10px 0; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between;">
-                    <span>Depósito Nómina</span>
-                    <span style="color: #10b981; font-weight: 700;">+$650.000</span>
-                </li>
-            </ul>
+        <!-- VISTA 3: MOVIMIENTOS -->
+        <div id="view-movimientos" class="hidden">
+            <div class="card-box">
+                <h2 style="font-size: 16px; margin-bottom: 15px;">Historial de Movimientos</h2>
+                <ul style="list-style: none; padding: 0; font-size: 13px;">
+                    <li style="padding: 12px 0; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between;">
+                        <span>Transferencia a Juan Pérez</span>
+                        <span style="color: #ef4444; font-weight: 700;">-$50.000</span>
+                    </li>
+                    <li style="padding: 12px 0; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between;">
+                        <span>Depósito Nómina</span>
+                        <span style="color: #10b981; font-weight: 700;">+$650.000</span>
+                    </li>
+                </ul>
+            </div>
         </div>
 
-        <!-- VISTA 4: Sección del Voucher (Comprobante) -->
-        <div id="view-voucher" class="hidden" style="width: 100%; max-width: 420px;">
+        <!-- VISTA 4: VOUCHER / COMPROBANTE -->
+        <div id="view-voucher" class="hidden">
             <!-- Tarjeta Capturable para PNG -->
-            <div class="card" id="voucher-card" style="margin-bottom: 0;">
+            <div class="voucher-card" id="voucher-card">
                 <div class="success-icon">✓</div>
-                <div class="title">Comprobante de Transferencia</div>
+                <div class="voucher-title">Comprobante de Transferencia</div>
 
                 <table>
                     <tr class="monto-row">
@@ -342,7 +494,7 @@
                     </tr>
                 </table>
 
-                <div class="section-title">Destinatario</div>
+                <div style="font-size: 13px; font-weight: 800; color: #0f172a; margin-top: 14px; margin-bottom: 6px;">Destinatario</div>
                 <table>
                     <tr>
                         <td class="text-label">Nombre</td>
@@ -362,7 +514,7 @@
                     </tr>
                 </table>
 
-                <div class="section-title">Cuenta de origen</div>
+                <div style="font-size: 13px; font-weight: 800; color: #0f172a; margin-top: 14px; margin-bottom: 6px;">Cuenta de origen</div>
                 <table>
                     <tr>
                         <td class="text-label" style="vertical-align: top;">Cuenta</td>
@@ -379,7 +531,7 @@
                 <table>
                     <tr>
                         <td class="text-label">Fecha y hora</td>
-                        <td class="text-value" id="lbl-fecha">28/09/2026 - 18:45</td>
+                        <td class="text-value" id="lbl-fecha">28/09/2026 - 19:10</td>
                     </tr>
                     <tr>
                         <td class="text-label">N° de operación</td>
@@ -388,19 +540,14 @@
                 </table>
             </div>
 
-            <!-- Botones de Acción (Fuera de la captura PNG) -->
+            <!-- Botones de Acción -->
             <div class="voucher-actions">
-                <!-- 1. Imprimir voucher -->
                 <button class="btn btn-print" onclick="imprimirVoucher()">
                     🖨️ Imprimir voucher
                 </button>
-
-                <!-- 2. Guardar voucher en PNG -->
                 <button class="btn btn-png" onclick="guardarVoucherPng()">
                     📥 Guardar voucher en PNG
                 </button>
-
-                <!-- 3. Cerrar voucher -->
                 <button class="btn btn-close" onclick="cerrarVoucher()">
                     ❌ Cerrar voucher
                 </button>
@@ -409,21 +556,37 @@
 
     </div>
 
+    <!-- Barra de Navegación Inferior -->
+    <nav class="bottom-nav" id="bottom-nav">
+        <button class="nav-item active" id="nav-inicio" onclick="cambiarVista('inicio')">
+            <span style="font-size: 18px;">🏠</span>
+            Inicio
+        </button>
+        <button class="nav-item" id="nav-transferir" onclick="cambiarVista('transferir')">
+            <span style="font-size: 18px;">🔄</span>
+            Transferir
+        </button>
+        <button class="nav-item" id="nav-movimientos" onclick="cambiarVista('movimientos')">
+            <span style="font-size: 18px;">⏱️</span>
+            Historial
+        </button>
+        <button class="nav-item" onclick="alert('Módulo de Seguridad')">
+            <span style="font-size: 18px;">🛡️</span>
+            Seguridad
+        </button>
+    </nav>
+
     <script>
-        // Función para cambiar entre pestañas del menú superior
         function cambiarVista(vista) {
-            // Ocultar todas las vistas principales y el voucher
             document.getElementById('view-inicio').classList.add('hidden');
             document.getElementById('view-transferir').classList.add('hidden');
             document.getElementById('view-movimientos').classList.add('hidden');
             document.getElementById('view-voucher').classList.add('hidden');
 
-            // Quitar clase active de los botones del menú
             document.getElementById('nav-inicio').classList.remove('active');
             document.getElementById('nav-transferir').classList.remove('active');
             document.getElementById('nav-movimientos').classList.remove('active');
 
-            // Mostrar la vista seleccionada y activar su botón
             if (vista === 'inicio') {
                 document.getElementById('view-inicio').classList.remove('hidden');
                 document.getElementById('nav-inicio').classList.add('active');
@@ -436,7 +599,6 @@
             }
         }
 
-        // Simular transferencia y mostrar el voucher
         function simularTransferencia() {
             document.getElementById('lbl-monto').innerText = "$" + document.getElementById('input-monto').value;
             document.getElementById('lbl-nombre').innerText = document.getElementById('input-nombre').value;
@@ -446,20 +608,15 @@
             
             document.getElementById('lbl-operacion').innerText = Math.floor(100000 + Math.random() * 900000);
 
-            // Ocultar menú superior temporalmente al ver el voucher
-            document.getElementById('app-nav').style.display = 'none';
-
-            // Ocultar formularios y mostrar voucher
+            document.getElementById('bottom-nav').style.display = 'none';
             document.getElementById('view-transferir').classList.add('hidden');
             document.getElementById('view-voucher').classList.remove('hidden');
         }
 
-        // 1. Imprimir voucher
         function imprimirVoucher() {
             window.print();
         }
 
-        // 2. Guardar voucher en PNG
         function guardarVoucherPng() {
             const elemento = document.getElementById("voucher-card");
             html2canvas(elemento, { scale: 2 }).then(canvas => {
@@ -470,10 +627,9 @@
             });
         }
 
-        // 3. Cerrar voucher (Regresa al inicio y reactiva el menú)
         function cerrarVoucher() {
             document.getElementById('view-voucher').classList.add('hidden');
-            document.getElementById('app-nav').style.display = 'flex';
+            document.getElementById('bottom-nav').style.display = 'flex';
             cambiarVista('inicio');
         }
     </script>
