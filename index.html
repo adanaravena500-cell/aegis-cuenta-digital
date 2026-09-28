@@ -172,6 +172,7 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.03);
             border: 1px solid #e2e8f0;
             margin-bottom: 15px;
+            position: relative;
         }
 
         /* Formularios */
@@ -181,7 +182,7 @@
 
         .btn-primary {
             width: 100%;
-            background-color: #2563eb;
+            background-color: #0052cc;
             color: white;
             border: none;
             padding: 12px;
@@ -191,7 +192,7 @@
             cursor: pointer;
             margin-top: 10px;
         }
-        .btn-primary:hover { background-color: #1d4ed8; }
+        .btn-primary:hover { background-color: #0041a8; }
 
         /* Voucher / Comprobante */
         .voucher-card {
@@ -341,37 +342,64 @@
             </div>
         </div>
 
-        <!-- 2. TRANSFERIR -->
+        <!-- 2. TRANSFERIR (Exacto a tu diseño de imagen) -->
         <div id="view-transferir" class="hidden">
             <div class="card-box">
-                <h2 style="font-size: 16px; margin-bottom: 15px; text-align: center;">Realizar Transferencia</h2>
+                <button onclick="cambiarVista('inicio')" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 18px; cursor: pointer; color: #64748b;">✕</button>
+                <h2 style="font-size: 16px; margin-bottom: 20px; text-align: center;">Realizar Transferencia</h2>
+                
                 <div class="form-group">
-                    <label>Monto a transferir ($)</label>
-                    <input type="number" id="input-monto" value="50000">
-                </div>
-                <div class="form-group">
-                    <label>Nombre del Destinatario</label>
-                    <input type="text" id="input-nombre" value="Juan Pérez">
-                </div>
-                <div class="form-group">
-                    <label>RUT del Destinatario</label>
+                    <label>RUT Destinatario</label>
                     <input type="text" id="input-rut" value="12.345.678-9">
                 </div>
                 <div class="form-group">
-                    <label>Banco</label>
-                    <input type="text" id="input-banco" value="BancoEstado">
+                    <label>Nombre Destinatario</label>
+                    <input type="text" id="input-nombre" value="Juan Pérez">
                 </div>
                 <div class="form-group">
-                    <label>Número de Cuenta</label>
+                    <label>Correo Electrónico Destinatario (Opcional)</label>
+                    <input type="email" id="input-email" placeholder="destinatario@ejemplo.com" value="destinatario@ejemplo.com">
+                </div>
+                <div class="form-group">
+                    <label>Banco</label>
+                    <select id="input-banco">
+                        <option>BancoEstado</option>
+                        <option>Banco de Chile</option>
+                        <option>Santander</option>
+                        <option>Bci</option>
+                        <option>Scotiabank</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Tipo de Cuenta</label>
+                    <select id="input-tipo-cuenta">
+                        <option>CuentaRUT</option>
+                        <option>Cuenta Vista</option>
+                        <option>Cuenta Corriente</option>
+                        <option>Cuenta de Ahorro</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>N° de Cuenta</label>
                     <input type="text" id="input-cuenta" value="12345678">
                 </div>
-                <button class="btn-primary" onclick="procesarTransferencia()">Generar Comprobante</button>
+                <div class="form-group">
+                    <label>Monto ($)</label>
+                    <input type="number" id="input-monto" value="5000">
+                </div>
+                <div class="form-group">
+                    <label>Asunto / Mensaje</label>
+                    <input type="text" id="input-asunto" value="Pago de servicios">
+                </div>
+
+                <button class="btn-primary" onclick="procesarTransferencia()">Confirmar Transferencia</button>
             </div>
         </div>
 
         <!-- 3. PAGAR SERVICIOS -->
         <div id="view-servicios" class="hidden">
             <div class="card-box">
+                <button onclick="cambiarVista('inicio')" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 18px; cursor: pointer; color: #64748b;">✕</button>
                 <h2 style="font-size: 16px; margin-bottom: 15px; text-align: center;">Pago de Servicios</h2>
                 <div class="form-group">
                     <label>Seleccionar Empresa</label>
@@ -397,6 +425,7 @@
         <!-- 4. RECARGAS -->
         <div id="view-recargas" class="hidden">
             <div class="card-box">
+                <button onclick="cambiarVista('inicio')" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 18px; cursor: pointer; color: #64748b;">✕</button>
                 <h2 style="font-size: 16px; margin-bottom: 15px; text-align: center;">Recarga de Celular</h2>
                 <div class="form-group">
                     <label>Compañía</label>
@@ -422,6 +451,7 @@
         <!-- 5. MIS TARJETAS -->
         <div id="view-tarjetas" class="hidden">
             <div class="card-box" style="text-align: center;">
+                <button onclick="cambiarVista('inicio')" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 18px; cursor: pointer; color: #64748b;">✕</button>
                 <h2 style="font-size: 16px; margin-bottom: 15px;">Gestión de Tarjetas</h2>
                 <div class="debit-card" style="margin-bottom: 15px;">
                     <div class="card-type">Tarjeta Digital Activa</div>
@@ -438,6 +468,7 @@
         <!-- 6. PAGO QR -->
         <div id="view-qr" class="hidden">
             <div class="card-box" style="text-align: center;">
+                <button onclick="cambiarVista('inicio')" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 18px; cursor: pointer; color: #64748b;">✕</button>
                 <h2 style="font-size: 16px; margin-bottom: 15px;">Pago con Código QR</h2>
                 <div style="background: #f1f5f9; padding: 30px; border-radius: 12px; margin-bottom: 15px; font-size: 60px;">
                     📷
@@ -450,6 +481,7 @@
         <!-- 7. AVANCES -->
         <div id="view-avances" class="hidden">
             <div class="card-box">
+                <button onclick="cambiarVista('inicio')" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 18px; cursor: pointer; color: #64748b;">✕</button>
                 <h2 style="font-size: 16px; margin-bottom: 15px; text-align: center;">Avance en Efectivo</h2>
                 <div class="form-group">
                     <label>Monto disponible para avance</label>
@@ -489,32 +521,44 @@
             </div>
         </div>
 
-        <!-- 10. VOUCHER / COMPROBANTE -->
+        <!-- 10. VOUCHER / COMPROBANTE CON CORREO -->
         <div id="view-voucher" class="hidden">
             <div class="voucher-card" id="voucher-card">
                 <div class="success-icon">✓</div>
-                <div class="voucher-title">Comprobante de Operación</div>
+                <div class="voucher-title">Comprobante de Transferencia</div>
 
                 <table>
                     <tr class="monto-row">
                         <td class="text-label">Monto</td>
-                        <td class="text-value" id="lbl-monto">$50.000</td>
+                        <td class="text-value" id="lbl-monto">$5.000</td>
                     </tr>
                 </table>
 
-                <div style="font-size: 13px; font-weight: 800; color: #0f172a; margin-top: 14px; margin-bottom: 6px;">Detalle de Transacción</div>
+                <div style="font-size: 13px; font-weight: 800; color: #0f172a; margin-top: 14px; margin-bottom: 6px;">Destinatario</div>
                 <table>
                     <tr>
-                        <td class="text-label">Concepto</td>
-                        <td class="text-value" id="lbl-concepto">Transferencia</td>
-                    </tr>
-                    <tr>
-                        <td class="text-label">Destinatario</td>
+                        <td class="text-label">Nombre</td>
                         <td class="text-value" id="lbl-nombre">Juan Pérez</td>
                     </tr>
                     <tr>
-                        <td class="text-label">Cuenta / Destino</td>
+                        <td class="text-label">RUT</td>
+                        <td class="text-value" id="lbl-rut">12.345.678-9</td>
+                    </tr>
+                    <tr>
+                        <td class="text-label">Correo</td>
+                        <td class="text-value" id="lbl-correo">destinatario@ejemplo.com</td>
+                    </tr>
+                    <tr>
+                        <td class="text-label">Banco / Tipo</td>
+                        <td class="text-value" id="lbl-banco-tipo">BancoEstado - CuentaRUT</td>
+                    </tr>
+                    <tr>
+                        <td class="text-label">N° de Cuenta</td>
                         <td class="text-value" id="lbl-cuenta">12345678</td>
+                    </tr>
+                    <tr>
+                        <td class="text-label">Asunto</td>
+                        <td class="text-value" id="lbl-asunto">Pago de servicios</td>
                     </tr>
                 </table>
 
@@ -546,19 +590,15 @@
 
             <!-- Botones de Acción del Voucher -->
             <div class="voucher-actions">
-                <!-- 1. Imprimir -->
                 <button class="btn btn-print" onclick="imprimirVoucher()">
                     🖨️ Imprimir voucher
                 </button>
-                <!-- 2. Guardar PNG -->
                 <button class="btn btn-png" onclick="guardarVoucherPng()">
                     📥 Guardar voucher en PNG
                 </button>
-                <!-- 3. Enviar por Correo -->
                 <button class="btn btn-email" onclick="enviarPorCorreo()">
                     ✉️ Enviar por correo
                 </button>
-                <!-- 4. Cerrar -->
                 <button class="btn btn-close" onclick="cerrarVoucher()">
                     ❌ Cerrar voucher
                 </button>
@@ -592,6 +632,7 @@
         let historialMovimientos = [
             { texto: "Depósito Nómina", monto: "+$650.000", tipo: "positivo" }
         ];
+        let ultimoCorreoDestino = "";
 
         function actualizarHistorialUI() {
             const htmlMovs = historialMovimientos.map(m => `
@@ -626,30 +667,22 @@
             }
         }
 
-        function mostrarVoucher(concepto, montoNum, nombreDest, cuentaDest) {
-            document.getElementById('lbl-concepto').innerText = concepto;
-            document.getElementById('lbl-monto').innerText = "$" + montoNum.toLocaleString('es-CL');
-            document.getElementById('lbl-nombre').innerText = nombreDest;
-            document.getElementById('lbl-cuenta').innerText = cuentaDest;
-            
-            document.getElementById('lbl-operacion').innerText = Math.floor(100000 + Math.random() * 900000);
-
-            const ahora = new Date();
-            document.getElementById('lbl-fecha').innerText = ahora.toLocaleDateString('es-CL') + " - " + ahora.toLocaleTimeString('es-CL', {hour: '2-digit', minute:'2-digit'});
-
-            document.getElementById('bottom-nav').style.display = 'none';
-            cambiarVista('voucher');
-        }
-
         function procesarTransferencia() {
             const monto = parseInt(document.getElementById('input-monto').value) || 0;
             const nombre = document.getElementById('input-nombre').value;
+            const rut = document.getElementById('input-rut').value;
+            const correo = document.getElementById('input-email').value || "No especificado";
+            const banco = document.getElementById('input-banco').value;
+            const tipoCuenta = document.getElementById('input-tipo-cuenta').value;
             const cuenta = document.getElementById('input-cuenta').value;
+            const asunto = document.getElementById('input-asunto').value || "Transferencia Aegis";
 
             if (monto <= 0) {
                 alert("Ingrese un monto válido.");
                 return;
             }
+
+            ultimoCorreoDestino = document.getElementById('input-email').value;
 
             saldoActual -= monto;
             document.getElementById('lbl-saldo').innerText = "$" + saldoActual.toLocaleString('es-CL');
@@ -661,7 +694,21 @@
             });
             actualizarHistorialUI();
 
-            mostrarVoucher("Transferencia Bancaria", monto, nombre, cuenta);
+            // Inyectar en Voucher
+            document.getElementById('lbl-monto').innerText = "$" + monto.toLocaleString('es-CL');
+            document.getElementById('lbl-nombre').innerText = nombre;
+            document.getElementById('lbl-rut').innerText = rut;
+            document.getElementById('lbl-correo').innerText = correo;
+            document.getElementById('lbl-banco-tipo').innerText = banco + " - " + tipoCuenta;
+            document.getElementById('lbl-cuenta').innerText = cuenta;
+            document.getElementById('lbl-asunto').innerText = asunto;
+            document.getElementById('lbl-operacion').innerText = Math.floor(100000 + Math.random() * 900000);
+
+            const ahora = new Date();
+            document.getElementById('lbl-fecha').innerText = ahora.toLocaleDateString('es-CL') + " - " + ahora.toLocaleTimeString('es-CL', {hour: '2-digit', minute:'2-digit'});
+
+            document.getElementById('bottom-nav').style.display = 'none';
+            cambiarVista('voucher');
         }
 
         function pagarServicio() {
@@ -681,7 +728,20 @@
             });
             actualizarHistorialUI();
 
-            mostrarVoucher("Pago de Servicio", monto, empresa, "Cliente: " + cliente);
+            document.getElementById('lbl-monto').innerText = "$" + monto.toLocaleString('es-CL');
+            document.getElementById('lbl-nombre').innerText = empresa;
+            document.getElementById('lbl-rut').innerText = "N/A";
+            document.getElementById('lbl-correo').innerText = "No especificado";
+            document.getElementById('lbl-banco-tipo').innerText = "Servicios Básicos";
+            document.getElementById('lbl-cuenta').innerText = "Cliente: " + cliente;
+            document.getElementById('lbl-asunto').innerText = "Pago de cuenta";
+            document.getElementById('lbl-operacion').innerText = Math.floor(100000 + Math.random() * 900000);
+
+            const ahora = new Date();
+            document.getElementById('lbl-fecha').innerText = ahora.toLocaleDateString('es-CL') + " - " + ahora.toLocaleTimeString('es-CL', {hour: '2-digit', minute:'2-digit'});
+
+            document.getElementById('bottom-nav').style.display = 'none';
+            cambiarVista('voucher');
         }
 
         function hacerRecarga() {
@@ -701,7 +761,20 @@
             });
             actualizarHistorialUI();
 
-            mostrarVoucher("Recarga de Móvil", monto, comp, fono);
+            document.getElementById('lbl-monto').innerText = "$" + monto.toLocaleString('es-CL');
+            document.getElementById('lbl-nombre').innerText = "Recarga " + comp;
+            document.getElementById('lbl-rut').innerText = "N/A";
+            document.getElementById('lbl-correo').innerText = "No especificado";
+            document.getElementById('lbl-banco-tipo').innerText = "Telefonía Móvil";
+            document.getElementById('lbl-cuenta').innerText = fono;
+            document.getElementById('lbl-asunto').innerText = "Recarga de saldo";
+            document.getElementById('lbl-operacion').innerText = Math.floor(100000 + Math.random() * 900000);
+
+            const ahora = new Date();
+            document.getElementById('lbl-fecha').innerText = ahora.toLocaleDateString('es-CL') + " - " + ahora.toLocaleTimeString('es-CL', {hour: '2-digit', minute:'2-digit'});
+
+            document.getElementById('bottom-nav').style.display = 'none';
+            cambiarVista('voucher');
         }
 
         function pedirAvance() {
@@ -718,7 +791,20 @@
             });
             actualizarHistorialUI();
 
-            mostrarVoucher("Avance de Efectivo", monto, "Felipe Quinteros", "Cuenta Vista");
+            document.getElementById('lbl-monto').innerText = "$" + monto.toLocaleString('es-CL');
+            document.getElementById('lbl-nombre').innerText = "Felipe Quinteros";
+            document.getElementById('lbl-rut').innerText = "10.234.567-8";
+            document.getElementById('lbl-correo').innerText = "felipe@aegis.cl";
+            document.getElementById('lbl-banco-tipo').innerText = "Cuenta Vista - Avance";
+            document.getElementById('lbl-cuenta').innerText = "00010363459";
+            document.getElementById('lbl-asunto').innerText = "Avance de efectivo";
+            document.getElementById('lbl-operacion').innerText = Math.floor(100000 + Math.random() * 900000);
+
+            const ahora = new Date();
+            document.getElementById('lbl-fecha').innerText = ahora.toLocaleDateString('es-CL') + " - " + ahora.toLocaleTimeString('es-CL', {hour: '2-digit', minute:'2-digit'});
+
+            document.getElementById('bottom-nav').style.display = 'none';
+            cambiarVista('voucher');
         }
 
         function imprimirVoucher() {
@@ -736,10 +822,13 @@
         }
 
         function enviarPorCorreo() {
-            const correo = prompt("Ingrese el correo electrónico para enviar el comprobante:");
-            if (correo && correo.includes("@")) {
-                alert(`¡Comprobante enviado con éxito a ${correo}!`);
-            } else if (correo !== null) {
+            let correoDestino = ultimoCorreoDestino;
+            if (!correoDestino) {
+                correoDestino = prompt("Ingrese el correo electrónico para enviar el comprobante:");
+            }
+            if (correoDestino && correoDestino.includes("@")) {
+                alert(`¡Comprobante enviado exitosamente a ${correoDestino}!`);
+            } else {
                 alert("Por favor, ingrese un correo electrónico válido.");
             }
         }
@@ -749,7 +838,6 @@
             cambiarVista('inicio');
         }
 
-        // Inicializar historial al cargar
         actualizarHistorialUI();
     </script>
 </body>
