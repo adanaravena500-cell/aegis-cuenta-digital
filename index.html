@@ -1,354 +1,481 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aegis Company Digital</title>
     <!-- Librería html2canvas para la descarga en PNG -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        font-family:
-          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
 
-      body {
-        background-color: #f4f6f9;
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-      }
+        body {
+            background-color: #f4f6f9;
+            color: #1e293b;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
 
-      .card {
-        width: 100%;
-        max-width: 420px;
-        background: #ffffff;
-        border-radius: 16px;
-        padding: 25px 20px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-        margin-bottom: 20px;
-      }
+        /* Barra superior / Header */
+        header {
+            background-color: #0f172a;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
 
-      h2 {
-        font-size: 18px;
-        color: #1e293b;
-        margin-bottom: 20px;
-        text-align: center;
-      }
+        header h1 {
+            font-size: 18px;
+            font-weight: 700;
+        }
 
-      .form-group {
-        margin-bottom: 15px;
-      }
+        /* Menú de navegación inferior o pestañas */
+        nav {
+            background-color: #ffffff;
+            display: flex;
+            justify-content: space-around;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 10px 0;
+        }
 
-      .form-group label {
-        display: block;
-        font-size: 13px;
-        color: #64748b;
-        margin-bottom: 5px;
-        font-weight: 600;
-      }
+        nav button {
+            background: none;
+            border: none;
+            font-size: 13px;
+            font-weight: 600;
+            color: #64748b;
+            cursor: pointer;
+            padding: 6px 12px;
+            border-radius: 6px;
+        }
 
-      .form-group input {
-        width: 100%;
-        padding: 10px 12px;
-        border: 1px solid #cbd5e1;
-        border-radius: 8px;
-        font-size: 14px;
-      }
+        nav button.active {
+            color: #2563eb;
+            background-color: #eff6ff;
+        }
 
-      .btn-primary {
-        width: 100%;
-        background-color: #2563eb;
-        color: white;
-        border: none;
-        padding: 12px;
-        border-radius: 8px;
-        font-weight: 600;
-        font-size: 15px;
-        cursor: pointer;
-        margin-top: 10px;
-      }
-      .btn-primary:hover {
-        background-color: #1d4ed8;
-      }
+        /* Contenedor principal */
+        .main-container {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
 
-      /* Estilos del Voucher */
-      .success-icon {
-        width: 48px;
-        height: 48px;
-        background-color: #10b981;
-        color: #ffffff;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 24px;
-        font-weight: bold;
-        margin: 0 auto 12px auto;
-      }
+        .card {
+            width: 100%;
+            max-width: 420px;
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 25px 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 20px;
+        }
 
-      .title {
-        text-align: center;
-        font-size: 18px;
-        font-weight: 700;
-        color: #1e293b;
-        margin-bottom: 22px;
-      }
+        h2 {
+            font-size: 18px;
+            color: #1e293b;
+            margin-bottom: 20px;
+            text-align: center;
+        }
 
-      .section-title {
-        font-size: 14px;
-        font-weight: 800;
-        color: #0f172a;
-        margin-top: 14px;
-        margin-bottom: 6px;
-      }
+        /* Tarjeta de Cuenta en Inicio */
+        .account-card {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
 
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 13px;
-      }
+        .account-card .label {
+            font-size: 12px;
+            color: #94a3b8;
+        }
 
-      table td {
-        padding-bottom: 6px;
-      }
+        .account-card .name {
+            font-size: 16px;
+            font-weight: 700;
+            margin-top: 4px;
+        }
 
-      .text-label {
-        color: #64748b;
-      }
+        .account-card .number {
+            font-size: 14px;
+            letter-spacing: 1px;
+            margin-top: 2px;
+            color: #cbd5e1;
+        }
 
-      .text-value {
-        color: #0f172a;
-        font-weight: 700;
-        text-align: right;
-      }
+        .account-card .balance {
+            font-size: 24px;
+            font-weight: 800;
+            margin-top: 15px;
+            color: #34d399;
+        }
 
-      .monto-row td {
-        font-size: 20px;
-        font-weight: 800;
-        color: #0f172a;
-      }
+        /* Formularios */
+        .form-group {
+            margin-bottom: 15px;
+        }
 
-      .divider {
-        border: none;
-        border-top: 1px dotted #cbd5e1;
-        margin: 14px 0;
-      }
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            color: #64748b;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
 
-      /* Botones de acción del Voucher */
-      .voucher-actions {
-        margin-top: 20px;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-      }
+        .form-group input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 14px;
+        }
 
-      .btn {
-        border: none;
-        padding: 12px;
-        border-radius: 8px;
-        font-weight: 600;
-        font-size: 14px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        width: 100%;
-      }
+        .btn-primary {
+            width: 100%;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .btn-primary:hover { background-color: #1d4ed8; }
 
-      .btn-print {
-        background-color: #0f172a;
-        color: white;
-      }
-      .btn-print:hover {
-        background-color: #1e293b;
-      }
+        /* Estilos del Voucher */
+        .success-icon {
+            width: 48px;
+            height: 48px;
+            background-color: #10b981;
+            color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0 auto 12px auto;
+        }
 
-      .btn-png {
-        background-color: #059669;
-        color: white;
-      }
-      .btn-png:hover {
-        background-color: #047857;
-      }
+        .title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 22px;
+        }
 
-      .btn-close {
-        background-color: #ef4444;
-        color: white;
-      }
-      .btn-close:hover {
-        background-color: #dc2626;
-      }
+        .section-title {
+            font-size: 14px;
+            font-weight: 800;
+            color: #0f172a;
+            margin-top: 14px;
+            margin-bottom: 6px;
+        }
 
-      .hidden {
-        display: none;
-      }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        table td {
+            padding-bottom: 6px;
+        }
+
+        .text-label {
+            color: #64748b;
+        }
+
+        .text-value {
+            color: #0f172a;
+            font-weight: 700;
+            text-align: right;
+        }
+
+        .monto-row td {
+            font-size: 20px;
+            font-weight: 800;
+            color: #0f172a;
+        }
+
+        .divider {
+            border: none;
+            border-top: 1px dotted #cbd5e1;
+            margin: 14px 0;
+        }
+
+        /* Botones de acción del Voucher */
+        .voucher-actions {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn {
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+        }
+
+        .btn-print { background-color: #0f172a; color: white; }
+        .btn-print:hover { background-color: #1e293b; }
+
+        .btn-png { background-color: #059669; color: white; }
+        .btn-png:hover { background-color: #047857; }
+
+        .btn-close { background-color: #ef4444; color: white; }
+        .btn-close:hover { background-color: #dc2626; }
+
+        .hidden { display: none; }
     </style>
-  </head>
-  <body>
-    <!-- VISTA 1: Formulario Principal -->
-    <div class="card" id="main-section">
-      <h2>Aegis Company Digital - Transferencias</h2>
-      <div class="form-group">
-        <label>Monto a transferir ($)</label>
-        <input type="text" id="input-monto" value="50.000" />
-      </div>
-      <div class="form-group">
-        <label>Nombre del Destinatario</label>
-        <input type="text" id="input-nombre" value="Juan Pérez" />
-      </div>
-      <div class="form-group">
-        <label>RUT del Destinatario</label>
-        <input type="text" id="input-rut" value="12.345.678-9" />
-      </div>
-      <div class="form-group">
-        <label>Banco</label>
-        <input type="text" id="input-banco" value="BancoEstado" />
-      </div>
-      <div class="form-group">
-        <label>Número de Cuenta</label>
-        <input type="text" id="input-cuenta" value="12345678" />
-      </div>
-      <button class="btn-primary" onclick="simularTransferencia()">
-        Generar Comprobante
-      </button>
-    </div>
+</head>
+<body>
 
-    <!-- VISTA 2: Sección del Voucher (Oculta por defecto) -->
-    <div
-      id="voucher-section"
-      class="hidden"
-      style="width: 100%; max-width: 420px"
-    >
-      <!-- Tarjeta Capturable para PNG -->
-      <div class="card" id="voucher-card" style="margin-bottom: 0">
-        <div class="success-icon">✓</div>
-        <div class="title">Comprobante de Transferencia</div>
+    <!-- Header de la Aplicación -->
+    <header>
+        <h1>Aegis Company Digital</h1>
+        <span style="font-size: 12px; color: #94a3b8;">Portal Seguro</span>
+    </header>
 
-        <table>
-          <tr class="monto-row">
-            <td class="text-label">Monto</td>
-            <td class="text-value" id="lbl-monto">$50.000</td>
-          </tr>
-        </table>
+    <!-- Menú de Navegación -->
+    <nav id="app-nav">
+        <button id="nav-inicio" class="active" onclick="cambiarVista('inicio')">🏠 Inicio</button>
+        <button id="nav-transferir" onclick="cambiarVista('transferir')">💸 Transferir</button>
+        <button id="nav-movimientos" onclick="cambiarVista('movimientos')">📋 Movimientos</button>
+    </nav>
 
-        <div class="section-title">Destinatario</div>
-        <table>
-          <tr>
-            <td class="text-label">Nombre</td>
-            <td class="text-value" id="lbl-nombre">Juan Pérez</td>
-          </tr>
-          <tr>
-            <td class="text-label">RUT</td>
-            <td class="text-value" id="lbl-rut">12.345.678-9</td>
-          </tr>
-          <tr>
-            <td class="text-label">Banco</td>
-            <td class="text-value" id="lbl-banco">BancoEstado</td>
-          </tr>
-          <tr>
-            <td class="text-label">Cuenta</td>
-            <td class="text-value" id="lbl-cuenta">12345678</td>
-          </tr>
-        </table>
+    <!-- Contenedor Principal -->
+    <div class="main-container">
 
-        <div class="section-title">Cuenta de origen</div>
-        <table>
-          <tr>
-            <td class="text-label" style="vertical-align: top">Cuenta</td>
-            <td class="text-value">
-              Felipe Quinteros<br />
-              Cuenta Vista<br />
-              00010363459
-            </td>
-          </tr>
-        </table>
+        <!-- VISTA 1: Pantalla de Inicio / Dashboard -->
+        <div class="card" id="view-inicio">
+            <h2>Resumen de Cuenta</h2>
+            <div class="account-card">
+                <div class="label">Titular</div>
+                <div class="name">Felipe Quinteros</div>
+                <div class="label" style="margin-top: 10px;">Cuenta Vista</div>
+                <div class="number">N° 00010363459</div>
+                <div class="balance">$1.450.000</div>
+            </div>
+            <button class="btn-primary" onclick="cambiarVista('transferir')">Realizar Nueva Transferencia</button>
+        </div>
 
-        <hr class="divider" />
+        <!-- VISTA 2: Formulario de Transferencia -->
+        <div class="card hidden" id="view-transferir">
+            <h2>Nueva Transferencia</h2>
+            <div class="form-group">
+                <label>Monto a transferir ($)</label>
+                <input type="text" id="input-monto" value="50.000">
+            </div>
+            <div class="form-group">
+                <label>Nombre del Destinatario</label>
+                <input type="text" id="input-nombre" value="Juan Pérez">
+            </div>
+            <div class="form-group">
+                <label>RUT del Destinatario</label>
+                <input type="text" id="input-rut" value="12.345.678-9">
+            </div>
+            <div class="form-group">
+                <label>Banco</label>
+                <input type="text" id="input-banco" value="BancoEstado">
+            </div>
+            <div class="form-group">
+                <label>Número de Cuenta</label>
+                <input type="text" id="input-cuenta" value="12345678">
+            </div>
+            <button class="btn-primary" onclick="simularTransferencia()">Generar Comprobante</button>
+        </div>
 
-        <table>
-          <tr>
-            <td class="text-label">Fecha y hora</td>
-            <td class="text-value" id="lbl-fecha">28/09/2026 - 18:16</td>
-          </tr>
-          <tr>
-            <td class="text-label">N° de operación</td>
-            <td class="text-value" id="lbl-operacion">8492019</td>
-          </tr>
-        </table>
-      </div>
+        <!-- VISTA 3: Historial de Movimientos -->
+        <div class="card hidden" id="view-movimientos">
+            <h2>Últimos Movimientos</h2>
+            <div style="font-size: 13px; color: #64748b; margin-bottom: 10px;">Actividad reciente de la cuenta:</div>
+            <ul style="list-style: none; padding: 0;">
+                <li style="padding: 10px 0; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between;">
+                    <span>Transferencia a Juan Pérez</span>
+                    <span style="color: #ef4444; font-weight: 700;">-$50.000</span>
+                </li>
+                <li style="padding: 10px 0; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between;">
+                    <span>Depósito Nómina</span>
+                    <span style="color: #10b981; font-weight: 700;">+$650.000</span>
+                </li>
+            </ul>
+        </div>
 
-      <!-- Botones de Acción (Fuera de la captura PNG) -->
-      <div class="voucher-actions">
-        <!-- 1. Imprimir voucher (Térmica / Sistema) -->
-        <button class="btn btn-print" onclick="imprimirVoucher()">
-          🖨️ Imprimir voucher
-        </button>
+        <!-- VISTA 4: Sección del Voucher (Comprobante) -->
+        <div id="view-voucher" class="hidden" style="width: 100%; max-width: 420px;">
+            <!-- Tarjeta Capturable para PNG -->
+            <div class="card" id="voucher-card" style="margin-bottom: 0;">
+                <div class="success-icon">✓</div>
+                <div class="title">Comprobante de Transferencia</div>
 
-        <!-- 2. Guardar voucher en PNG -->
-        <button class="btn btn-png" onclick="guardarVoucherPng()">
-          📥 Guardar voucher en PNG
-        </button>
+                <table>
+                    <tr class="monto-row">
+                        <td class="text-label">Monto</td>
+                        <td class="text-value" id="lbl-monto">$50.000</td>
+                    </tr>
+                </table>
 
-        <!-- 3. Cerrar voucher -->
-        <button class="btn btn-close" onclick="cerrarVoucher()">
-          ❌ Cerrar voucher
-        </button>
-      </div>
+                <div class="section-title">Destinatario</div>
+                <table>
+                    <tr>
+                        <td class="text-label">Nombre</td>
+                        <td class="text-value" id="lbl-nombre">Juan Pérez</td>
+                    </tr>
+                    <tr>
+                        <td class="text-label">RUT</td>
+                        <td class="text-value" id="lbl-rut">12.345.678-9</td>
+                    </tr>
+                    <tr>
+                        <td class="text-label">Banco</td>
+                        <td class="text-value" id="lbl-banco">BancoEstado</td>
+                    </tr>
+                    <tr>
+                        <td class="text-label">Cuenta</td>
+                        <td class="text-value" id="lbl-cuenta">12345678</td>
+                    </tr>
+                </table>
+
+                <div class="section-title">Cuenta de origen</div>
+                <table>
+                    <tr>
+                        <td class="text-label" style="vertical-align: top;">Cuenta</td>
+                        <td class="text-value">
+                            Felipe Quinteros<br/>
+                            Cuenta Vista<br/>
+                            00010363459
+                        </td>
+                    </tr>
+                </table>
+
+                <hr class="divider" />
+
+                <table>
+                    <tr>
+                        <td class="text-label">Fecha y hora</td>
+                        <td class="text-value" id="lbl-fecha">28/09/2026 - 18:45</td>
+                    </tr>
+                    <tr>
+                        <td class="text-label">N° de operación</td>
+                        <td class="text-value" id="lbl-operacion">8492019</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Botones de Acción (Fuera de la captura PNG) -->
+            <div class="voucher-actions">
+                <!-- 1. Imprimir voucher -->
+                <button class="btn btn-print" onclick="imprimirVoucher()">
+                    🖨️ Imprimir voucher
+                </button>
+
+                <!-- 2. Guardar voucher en PNG -->
+                <button class="btn btn-png" onclick="guardarVoucherPng()">
+                    📥 Guardar voucher en PNG
+                </button>
+
+                <!-- 3. Cerrar voucher -->
+                <button class="btn btn-close" onclick="cerrarVoucher()">
+                    ❌ Cerrar voucher
+                </button>
+            </div>
+        </div>
+
     </div>
 
     <script>
-      function simularTransferencia() {
-        // Pasar datos del formulario al voucher
-        document.getElementById("lbl-monto").innerText =
-          "$" + document.getElementById("input-monto").value;
-        document.getElementById("lbl-nombre").innerText =
-          document.getElementById("input-nombre").value;
-        document.getElementById("lbl-rut").innerText =
-          document.getElementById("input-rut").value;
-        document.getElementById("lbl-banco").innerText =
-          document.getElementById("input-banco").value;
-        document.getElementById("lbl-cuenta").innerText =
-          document.getElementById("input-cuenta").value;
+        // Función para cambiar entre pestañas del menú superior
+        function cambiarVista(vista) {
+            // Ocultar todas las vistas principales y el voucher
+            document.getElementById('view-inicio').classList.add('hidden');
+            document.getElementById('view-transferir').classList.add('hidden');
+            document.getElementById('view-movimientos').classList.add('hidden');
+            document.getElementById('view-voucher').classList.add('hidden');
 
-        // Generar número de operación aleatorio
-        document.getElementById("lbl-operacion").innerText = Math.floor(
-          100000 + Math.random() * 900000,
-        );
+            // Quitar clase active de los botones del menú
+            document.getElementById('nav-inicio').classList.remove('active');
+            document.getElementById('nav-transferir').classList.remove('active');
+            document.getElementById('nav-movimientos').classList.remove('active');
 
-        // Cambiar de vista
-        document.getElementById("main-section").classList.add("hidden");
-        document.getElementById("voucher-section").classList.remove("hidden");
-      }
+            // Mostrar la vista seleccionada y activar su botón
+            if (vista === 'inicio') {
+                document.getElementById('view-inicio').classList.remove('hidden');
+                document.getElementById('nav-inicio').classList.add('active');
+            } else if (vista === 'transferir') {
+                document.getElementById('view-transferir').classList.remove('hidden');
+                document.getElementById('nav-transferir').classList.add('active');
+            } else if (vista === 'movimientos') {
+                document.getElementById('view-movimientos').classList.remove('hidden');
+                document.getElementById('nav-movimientos').classList.add('active');
+            }
+        }
 
-      // 1. Imprimir voucher
-      function imprimirVoucher() {
-        window.print();
-      }
+        // Simular transferencia y mostrar el voucher
+        function simularTransferencia() {
+            document.getElementById('lbl-monto').innerText = "$" + document.getElementById('input-monto').value;
+            document.getElementById('lbl-nombre').innerText = document.getElementById('input-nombre').value;
+            document.getElementById('lbl-rut').innerText = document.getElementById('input-rut').value;
+            document.getElementById('lbl-banco').innerText = document.getElementById('input-banco').value;
+            document.getElementById('lbl-cuenta').innerText = document.getElementById('input-cuenta').value;
+            
+            document.getElementById('lbl-operacion').innerText = Math.floor(100000 + Math.random() * 900000);
 
-      // 2. Guardar voucher en PNG
-      function guardarVoucherPng() {
-        const elemento = document.getElementById("voucher-card");
-        html2canvas(elemento, { scale: 2 }).then((canvas) => {
-          const link = document.createElement("a");
-          link.download = "Comprobante_Aegis.png";
-          link.href = canvas.toDataURL("image/png");
-          link.click();
-        });
-      }
+            // Ocultar menú superior temporalmente al ver el voucher
+            document.getElementById('app-nav').style.display = 'none';
 
-      // 3. Cerrar voucher (Regresa a la pantalla principal)
-      function cerrarVoucher() {
-        document.getElementById("voucher-section").classList.add("hidden");
-        document.getElementById("main-section").classList.remove("hidden");
-      }
+            // Ocultar formularios y mostrar voucher
+            document.getElementById('view-transferir').classList.add('hidden');
+            document.getElementById('view-voucher').classList.remove('hidden');
+        }
+
+        // 1. Imprimir voucher
+        function imprimirVoucher() {
+            window.print();
+        }
+
+        // 2. Guardar voucher en PNG
+        function guardarVoucherPng() {
+            const elemento = document.getElementById("voucher-card");
+            html2canvas(elemento, { scale: 2 }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'Comprobante_Aegis.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+        }
+
+        // 3. Cerrar voucher (Regresa al inicio y reactiva el menú)
+        function cerrarVoucher() {
+            document.getElementById('view-voucher').classList.add('hidden');
+            document.getElementById('app-nav').style.display = 'flex';
+            cambiarVista('inicio');
+        }
     </script>
-  </body>
+</body>
 </html>
