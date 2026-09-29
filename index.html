@@ -6,6 +6,15 @@
     <title>Aegis Company Digital</title>
     <!-- Librería html2canvas -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- Librería EmailJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init({
+                publicKey: "TU_PUBLIC_KEY", // Reemplaza con tu Public Key de EmailJS
+            });
+        })();
+    </script>
     <style>
         * {
             box-sizing: border-box;
@@ -532,7 +541,7 @@
     <nav class="bottom-nav" id="bottom-nav">
         <button class="nav-item active" id="nav-inicio" onclick="cambiarVista('inicio')">🏠 Inicio</button>
         <button class="nav-item" id="nav-transferir" onclick="cambiarVista('transferir')">🔄 Transferir</button>
-        <button class="nav-item" id="nav-movimientos" onclick="cambiarVista('movimientos')">⏱️️ Historial</button>
+        <button class="nav-item" id="nav-movimientos" onclick="cambiarVista('movimientos')">⏱ Historial</button>
         <button class="nav-item" id="nav-seguridad" onclick="cambiarVista('seguridad')">🛡️ Seguridad</button>
     </nav>
 
@@ -613,30 +622,27 @@
             cambiarVista('voucher');
         }
 
-        // --- ENVÍO INMEDIATO Y AUTOMÁTICO AL CONFIRMAR ---
+        // --- ENVÍO 100% AUTOMÁTICO VÍA EMAILJS ---
         function dispararCorreoAutomatico(item) {
-            const asunto = encodeURIComponent(`Transferencia Exitosa - ${item.monto}`);
-            const cuerpo = encodeURIComponent(
-                `✓ TRANSFERENCIA EXITOSA\n\n` +
-                `Monto: ${item.monto}\n` +
-                `Destinatario: ${item.nombre}\n` +
-                `Ref/Cliente: ${item.cuenta}\n` +
-                `Servicio: Aegis Pay\n` +
-                `Correo Destino: ${item.correo}\n` +
-                `Cuenta de origen: Cuenta Vista 00010363459\n` +
-                `Fecha y hora: ${item.fecha}\n` +
-                `N° de operación: ${item.operacion}\n\n` +
-                `----------------------------------------\n` +
-                `Víctor Adán Aravena Ortuya\n` +
-                `Técnico en Ciberseguridad\n` +
-                `CFT San Agustín Curicó\n` +
-                `📧 aegisvanguardcompany@gmail.com\n` +
-                `WhatsApp: +569-27074633`
-            );
+            const templateParams = {
+                to_email: item.correo,
+                nombre: item.nombre,
+                monto: item.monto,
+                cuenta: item.cuenta,
+                correo: item.correo,
+                fecha: item.fecha,
+                operacion: item.operacion
+            };
 
-            setTimeout(() => {
-                window.open(`mailto:${item.correo}?subject=${asunto}&body=${cuerpo}`, '_blank');
-            }, 300);
+            const SERVICE_ID = "service_7db7x4g";
+            const TEMPLATE_ID = "template_t6c4i3i"; // Reemplaza con tu Template ID real de EmailJS
+
+            emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
+                .then(function(response) {
+                    console.log('Correo enviado con éxito!', response.status, response.text);
+                }, function(error) {
+                    console.log('Error al enviar correo:', error);
+                });
         }
 
         function procesarTransferencia() {
@@ -672,7 +678,7 @@
             historialMovimientos.unshift(nuevoItem);
             actualizarHistorialUI();
             
-            // Envío inmediato y automático del correo
+            // Envío automático e inmediato
             dispararCorreoAutomatico(nuevoItem);
             
             verVoucher(0);
