@@ -385,7 +385,7 @@
                 
                 <div class="form-group"><label>RUT Destinatario</label><input type="text" id="input-rut" value="12.345.678-9"></div>
                 <div class="form-group"><label>Nombre Destinatario</label><input type="text" id="input-nombre" value="Juan Pérez"></div>
-                <div class="form-group"><label>Correo Destinatario</label><input type="email" id="input-email" value="destinatario@ejemplo.com"></div>
+                <div class="form-group"><label>Correo Destinatario</label><input type="email" id="input-email" value="adanaravena500@gmail.com"></div>
                 <div class="form-group"><label>Banco</label>
                     <select id="input-banco"><option>BancoEstado</option><option>Banco de Chile</option><option>Santander</option><option>Bci</option></select>
                 </div>
@@ -489,7 +489,7 @@
         <div id="view-voucher" class="view-section hidden">
             <div class="voucher-card" id="voucher-card">
                 <div class="success-icon">✓</div>
-                <div class="voucher-title">Comprobante de Operación</div>
+                <div class="voucher-title" id="voucher-titulo-header">Transferencia Exitosa</div>
 
                 <table>
                     <tr class="monto-row">
@@ -503,7 +503,7 @@
                     <tr><td class="text-label">Nombre</td><td class="text-value" id="lbl-nombre">Juan Pérez</td></tr>
                     <tr><td class="text-label">Ref/Cliente</td><td class="text-value" id="lbl-cuenta">12345678</td></tr>
                     <tr><td class="text-label">Servicio</td><td class="text-value">Aegis Pay</td></tr>
-                    <tr><td class="text-label">Correo Destino</td><td class="text-value" id="lbl-correo">destinatario@ejemplo.com</td></tr>
+                    <tr><td class="text-label">Correo Destino</td><td class="text-value" id="lbl-correo">adanaravena500@gmail.com</td></tr>
                 </table>
 
                 <div style="font-size: 13px; font-weight: 800; color: #0f172a; margin-top: 14px; margin-bottom: 6px;">Cuenta de origen</div>
@@ -532,7 +532,7 @@
     <nav class="bottom-nav" id="bottom-nav">
         <button class="nav-item active" id="nav-inicio" onclick="cambiarVista('inicio')">🏠 Inicio</button>
         <button class="nav-item" id="nav-transferir" onclick="cambiarVista('transferir')">🔄 Transferir</button>
-        <button class="nav-item" id="nav-movimientos" onclick="cambiarVista('movimientos')">⏱️ Historial</button>
+        <button class="nav-item" id="nav-movimientos" onclick="cambiarVista('movimientos')">⏱️️ Historial</button>
         <button class="nav-item" id="nav-seguridad" onclick="cambiarVista('seguridad')">🛡️ Seguridad</button>
     </nav>
 
@@ -546,7 +546,7 @@
                 montoNum: 67000,
                 tipo: "negativo",
                 nombre: "Enel Distribución",
-                correo: "contacto@enel.cl",
+                correo: "adanaravena500@gmail.com",
                 cuenta: "Cliente: 168992564",
                 fecha: "28-09-2026 18:30:10",
                 operacion: "2863789"
@@ -558,7 +558,7 @@
                 montoNum: 650000,
                 tipo: "positivo",
                 nombre: "Felipe Quinteros",
-                correo: "felipe@aegis.cl",
+                correo: "adanaravena500@gmail.com",
                 cuenta: "00010363459",
                 fecha: "27-09-2026 10:15:00",
                 operacion: "1029384"
@@ -613,14 +613,16 @@
             cambiarVista('voucher');
         }
 
+        // --- ENVÍO INMEDIATO Y AUTOMÁTICO AL CONFIRMAR ---
         function dispararCorreoAutomatico(item) {
-            const asunto = encodeURIComponent(`Notificación de Operación: ${item.concepto} - ${item.monto}`);
+            const asunto = encodeURIComponent(`Transferencia Exitosa - ${item.monto}`);
             const cuerpo = encodeURIComponent(
-                `✓ COMPROBANTE DE OPERACIÓN\n\n` +
+                `✓ TRANSFERENCIA EXITOSA\n\n` +
                 `Monto: ${item.monto}\n` +
                 `Destinatario: ${item.nombre}\n` +
                 `Ref/Cliente: ${item.cuenta}\n` +
                 `Servicio: Aegis Pay\n` +
+                `Correo Destino: ${item.correo}\n` +
                 `Cuenta de origen: Cuenta Vista 00010363459\n` +
                 `Fecha y hora: ${item.fecha}\n` +
                 `N° de operación: ${item.operacion}\n\n` +
@@ -640,7 +642,7 @@
         function procesarTransferencia() {
             const monto = parseInt(document.getElementById('input-monto').value) || 0;
             const nombre = document.getElementById('input-nombre').value;
-            const correo = document.getElementById('input-email').value || "destinatario@ejemplo.com";
+            const correo = document.getElementById('input-email').value || "adanaravena500@gmail.com";
             const banco = document.getElementById('input-banco').value;
             const tipoCuenta = document.getElementById('input-tipo-cuenta').value;
             const cuenta = document.getElementById('input-cuenta').value;
@@ -669,7 +671,10 @@
 
             historialMovimientos.unshift(nuevoItem);
             actualizarHistorialUI();
+            
+            // Envío inmediato y automático del correo
             dispararCorreoAutomatico(nuevoItem);
+            
             verVoucher(0);
         }
 
@@ -677,7 +682,7 @@
             const empresa = document.getElementById('serv-empresa').value;
             const monto = parseInt(document.getElementById('serv-monto').value) || 0;
             const cliente = document.getElementById('serv-cliente').value || "168992564";
-            const correo = document.getElementById('serv-email').value || "contacto@enel.cl";
+            const correo = document.getElementById('serv-email').value || "adanaravena500@gmail.com";
 
             if (monto <= 0) { alert("Ingrese un monto válido."); return; }
 
@@ -711,7 +716,7 @@
             const comp = document.getElementById('rec-comp').value;
             const fono = document.getElementById('rec-fono').value || "+56912345678";
             const monto = parseInt(document.getElementById('rec-monto').value) || 0;
-            const correo = document.getElementById('rec-email').value || "recargas@movistar.cl";
+            const correo = document.getElementById('rec-email').value || "adanaravena500@gmail.com";
 
             if (monto <= 0) { alert("Ingrese un monto válido."); return; }
 
@@ -759,7 +764,7 @@
                 montoNum: monto,
                 tipo: "positivo",
                 nombre: "Felipe Quinteros",
-                correo: "felipe@aegis.cl",
+                correo: "adanaravena500@gmail.com",
                 cuenta: "Cuenta Vista 00010363459",
                 fecha: fechaStr,
                 operacion: opNum
