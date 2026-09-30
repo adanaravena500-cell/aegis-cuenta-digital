@@ -11,7 +11,7 @@
     <script type="text/javascript">
         (function() {
             emailjs.init({
-                publicKey: "lwlr_VijqU2m_p2f9", // Reemplaza con tu Public Key de EmailJS
+                publicKey: "lwlr_VijqU2m_p2f9", // Tu Public Key
             });
         })();
     </script>
@@ -61,7 +61,7 @@
         }
 
         .user-text .welcome { font-size: 12px; color: #64748b; }
-        .user-text .name { font-size: 16px; font-weight: 700; color: #0f172a; }
+        .user-text .name { font-size: 15px; font-weight: 700; color: #0f172a; }
 
         .notification-btn {
             background: #f1f5f9;
@@ -314,10 +314,10 @@
     <!-- Cabecera -->
     <div class="app-header">
         <div class="user-info">
-            <div class="user-avatar">FQ</div>
+            <div class="user-avatar">AD</div>
             <div class="user-text">
                 <div class="welcome">Bienvenido de nuevo</div>
-                <div class="name">Felipe Quinteros</div>
+                <div class="name">AEGIS Digital PAY</div>
             </div>
         </div>
         <button class="notification-btn" onclick="alert('Sin notificaciones nuevas')">🔔</button>
@@ -329,11 +329,11 @@
         <!-- 1. INICIO -->
         <div id="view-inicio" class="view-section">
             <div class="debit-card">
-                <div class="card-type">Cuenta Vista (00010363459)</div>
+                <div class="card-type">AEGIS Company Pay · Cuenta Vista</div>
                 <div class="balance-label">Saldo Disponible</div>
                 <div class="balance-amount" id="lbl-saldo">$1.450.000</div>
                 <div class="card-footer">
-                    <div class="card-number">**** **** **** 3459</div>
+                    <div class="card-number">00010363459</div>
                     <div class="visa-logo">VISA</div>
                 </div>
             </div>
@@ -354,7 +354,7 @@
                     <div class="service-text">Transferir</div>
                 </div>
                 <div class="service-item" onclick="cambiarVista('movimientos')">
-                    <div class="service-icon" style="background: #faf5ff; color: #9333ea;">⏱️</div>
+                    <div class="service-icon" style="background: #faf5ff; color: #9333ea;">⏱️️</div>
                     <div class="service-text">Movimientos</div>
                 </div>
                 <div class="service-item" onclick="cambiarVista('recargas')">
@@ -442,9 +442,9 @@
                 <button onclick="cambiarVista('inicio')" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 18px; cursor: pointer; color: #64748b;">✕</button>
                 <h2 style="font-size: 16px; margin-bottom: 15px;">Gestión de Tarjetas</h2>
                 <div class="debit-card" style="margin-bottom: 15px;">
-                    <div class="card-type">Tarjeta Digital Activa</div>
+                    <div class="card-type">AEGIS Company Pay</div>
                     <div class="balance-label">CVV: 489</div>
-                    <div class="card-footer"><div class="card-number">**** 3459</div><div class="visa-logo">VISA</div></div>
+                    <div class="card-footer"><div class="card-number">00010363459</div><div class="visa-logo">VISA</div></div>
                 </div>
                 <button class="btn-primary" style="background-color: #dc2626;" onclick="alert('Tarjeta bloqueada temporalmente por seguridad.')">Bloquear Tarjeta</button>
             </div>
@@ -517,14 +517,14 @@
 
                 <div style="font-size: 13px; font-weight: 800; color: #0f172a; margin-top: 14px; margin-bottom: 6px;">Cuenta de origen</div>
                 <table>
-                    <tr><td class="text-label">Cuenta</td><td class="text-value">Cuenta Vista<br/>00010363459</td></tr>
+                    <tr><td class="text-label">Cuenta</td><td class="text-value">AEGIS Company Pay<br/>Cuenta Vista<br/>00010363459</td></tr>
                 </table>
 
                 <hr class="divider" />
 
                 <table>
-                    <tr><td class="text-label">Fecha y hora</td><td class="text-value" id="lbl-fecha">28-09-2026 18:30:10</td></tr>
-                    <tr><td class="text-label">N° de operación</td><td class="text-value" id="lbl-operacion">2863789</td></tr>
+                    <tr><td class="text-label">Fecha y hora</td><td class="text-value" id="lbl-fecha">30-09-2026 15:00:00</td></tr>
+                    <tr><td class="text-label">N° de operación</td><td class="text-value" id="lbl-operacion">989207</td></tr>
                 </table>
             </div>
 
@@ -557,19 +557,19 @@
                 nombre: "Enel Distribución",
                 correo: "adanaravena500@gmail.com",
                 cuenta: "Cliente: 168992564",
-                fecha: "28-09-2026 18:30:10",
+                fecha: "30-09-2026 14:30:10",
                 operacion: "2863789"
             },
             {
                 concepto: "Depósito Nómina",
-                texto: "Felipe Quinteros",
+                texto: "AEGIS Digital PAY",
                 monto: "+$650.000",
                 montoNum: 650000,
                 tipo: "positivo",
-                nombre: "Felipe Quinteros",
+                nombre: "AEGIS Digital PAY",
                 correo: "adanaravena500@gmail.com",
                 cuenta: "00010363459",
-                fecha: "27-09-2026 10:15:00",
+                fecha: "30-09-2026 10:15:00",
                 operacion: "1029384"
             }
         ];
@@ -635,7 +635,7 @@
             };
 
             const SERVICE_ID = "service_7db7x4g";
-            const TEMPLATE_ID = "template_t6c4i3i"; // Reemplaza con tu Template ID real de EmailJS
+            const TEMPLATE_ID = "template_71gok3i"; // Asegúrate de colocar tu Template ID real si es diferente
 
             emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
                 .then(function(response) {
@@ -677,10 +677,7 @@
 
             historialMovimientos.unshift(nuevoItem);
             actualizarHistorialUI();
-            
-            // Envío automático e inmediato
             dispararCorreoAutomatico(nuevoItem);
-            
             verVoucher(0);
         }
 
@@ -769,9 +766,9 @@
                 monto: `+$${monto.toLocaleString('es-CL')}`,
                 montoNum: monto,
                 tipo: "positivo",
-                nombre: "Felipe Quinteros",
+                nombre: "AEGIS Digital PAY",
                 correo: "adanaravena500@gmail.com",
-                cuenta: "Cuenta Vista 00010363459",
+                cuenta: "AEGIS Company Pay · Cuenta Vista 00010363459",
                 fecha: fechaStr,
                 operacion: opNum
             };
