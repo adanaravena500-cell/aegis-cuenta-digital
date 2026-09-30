@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aegis Company Digital</title>
+    <!-- Librería EmailJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init({
+                publicKey: "lwlr_VijqU2m_p2f9", // Tu Public Key
+            });
+        })();
+    </script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: #f4f6f9;
+            color: #1e293b;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            padding-bottom: 70px;
+        }
+
+        .app-header {
+            background-color: #ffffff;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-avatar {
+            width: 42px;
+            height: 42px;
+            background-color: #1d4ed8;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .user-text .welcome { font-size: 12px; color: #64748b; }
+        .user-text .name { font-size: 15px; font-weight: 700; color: #0f172a; }
+
+        .notification-btn {
+            background: #f1f5f9;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 420px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .debit-card {
+            background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 8px 20px rgba(29, 78, 216, 0.25);
+            margin-bottom: 15px;
+        }
+
+        .debit-card .card-type { font-size: 13px; color: #bfdbfe; font-weight: 500; }
+        .debit-card .balance-label { font-size: 12px; color: #93c5fd; margin-top: 12px; }
+        .debit-card .balance-amount { font-size: 28px; font-weight: 800; margin-top: 2px; }
+        .debit-card .card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; }
+        .debit-card .card-number { font-size: 14px; letter-spacing: 2px; color: #e0e7ff; }
+        .debit-card .visa-logo { font-weight: 800; font-style: italic; font-size: 16px; letter-spacing: 1px; }
+
+        .btn-fintoc {
+            width: 100%;
+            background-color: #1d4ed8;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(29, 78, 216, 0.15);
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 15px;
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .service-item {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 12px 6px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .service-item:hover { border-color: #2563eb; transform: translateY(-2px); }
+
+        .service-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            margin-bottom: 6px;
+        }
+
+        .service-text { font-size: 11px; font-weight: 600; color: #334155; text-align: center; }
+
+        .card-box {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            border: 1px solid #e2e8f0;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .activity-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 14px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .activity-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .activity-icon {
+            width: 38px;
+            height: 38px;
+            background: #fef2f2;
+            color: #dc2626;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .activity-details .title { font-size: 14px; font-weight: 700; color: #0f172a; }
+        .activity-details .subtitle { font-size: 11px; color: #64748b; margin-top: 2px; }
+
+        .activity-right { text-align: right; }
+        .activity-amount { font-size: 14px; font-weight: 800; color: #ef4444; margin-bottom: 6px; }
+        .activity-amount.positive { color: #10b981; }
+
+        .btn-ver-voucher {
+            background-color: #0052cc;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-size: 13px; color: #64748b; margin-bottom: 5px; font-weight: 600; }
+        .form-group input, .form-group select { width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; background: #fff; }
+
+        .btn-primary {
+            width: 100%;
+            background-color: #0052cc;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .btn-primary:hover { background-color: #0041a8; }
+
+        .voucher-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 25px 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 15px;
+        }
+
+        .success-icon {
+            width: 48px;
+            height: 48px;
+            background-color: #10b981;
+            color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0 auto 12px auto;
+        }
+
+        .voucher-title { text-align: center; font-size: 18px; font-weight: 700; color: #1e293b; margin-bottom: 22px; }
+
+        table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        table td { padding-bottom: 6px; }
+        .text-label { color: #64748b; }
+        .text-value { color: #0f172a; font-weight: 700; text-align: right; }
+        .monto-row td { font-size: 20px; font-weight: 800; color: #0f172a; }
+
+        .divider { border: none; border-top: 1px dotted #cbd5e1; margin: 14px 0; }
+
+        .voucher-actions { display: flex; flex-direction: column; gap: 10px; }
+        .btn { border: none; padding: 12px; border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; }
+        .btn-print { background-color: #0f172a; color: white; }
+        .btn-whatsapp { background-color: #25d366; color: white; }
+        .btn-close { background-color: #ef4444; color: white; }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #ffffff;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.03);
+            z-index: 100;
+        }
+
+        .nav-item {
+            background: none;
+            border: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 11px;
+            font-weight: 600;
+            color: #64748b;
+            cursor: pointer;
+        }
+        .nav-item.active { color: #2563eb; }
+
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+    <!-- Cabecera -->
+    <div class="app-header">
+        <div class="user-info">
+            <div class="user-avatar">AD</div>
+            <div class="user-text">
+                <div class="welcome">Bienvenido de nuevo</div>
+                <div class="name">AEGIS Digital PAY</div>
+            </div>
+        </div>
+        <button class="notification-btn" onclick="alert('Sin notificaciones nuevas')">🔔</button>
+    </div>
+
+    <!-- Contenedor Principal -->
+    <div class="container">
+
+        <!-- 1. INICIO -->
+        <div id="view-inicio" class="view-section">
+            <div class="debit-card">
+                <div class="card-type">AEGIS Company Pay · Cuenta Vista</div>
+                <div class="balance-label">Saldo Disponible</div>
+                <div class="balance-amount" id="lbl-saldo">$1.450.000</div>
+                <div class="card-footer">
+                    <div class="card-number">00010363459</div>
+                    <div class="visa-logo">VISA</div>
+                </div>
+            </div>
+
+            <button class="btn-fintoc" onclick="alert('Banco vinculado exitosamente con Fintoc API.')">
+                🔗 Conectar Banco con Fintoc
+            </button>
+
+            <div class="section-title">Servicios y Operaciones</div>
+            
+            <div class="services-grid">
+                <div class="service-item" onclick="cambiarVista('servicios')">
+                    <div class="service-icon" style="background: #eff6ff; color: #2563eb;">📄</div>
+                    <div class="service-text">Pagar Servicios</div>
+                </div>
+                <div class="service-item" onclick="cambiarVista('transferir')">
+                    <div class="service-icon" style="background: #f0fdf4; color: #16a34a;">🔄</div>
+                    <div class="service-text">Transferir</div>
+                </div>
+                <div class="service-item" onclick="cambiarVista('movimientos')">
+                    <div class="service-icon" style="background: #faf5ff; color: #9333ea;">⏱</div>
+                    <div class="service-text">Movimientos</div>
+                </div>
+                <div class="service-item" onclick="cambiarVista('recargas')">
+                    <div class="service-icon" style="background: #fff7ed; color: #ea580c;">📱</div>
+                    <div class="service-text">Recargas</div>
+                </div>
+                <div class="service-item" onclick="cambiarVista('tarjetas')">
+                    <div class="service-icon" style="background: #fef2f2; color: #dc2626;">💳</div>
+                    <div class="service-text">Mis Tarjetas</div>
+                </div>
+                <div class="service-item" onclick="cambiarVista('qr')">
+                    <div class="service-icon" style="background: #ecfdf5; color: #059669;">📱</div>
+                    <div class="service-text">Pago QR</div>
+                </div>
+                <div class="service-item" onclick="cambiarVista('avances')">
+                    <div class="service-icon" style="background: #fefce8; color: #ca8a04;">💵</div>
+                    <div class="service-text">Avances</div>
+                </div>
+                <div class="service-item" onclick="cambiarVista('seguridad')">
+                    <div class="service-icon" style="background: #f0fdfa; color: #0d9488;">🛡️️</div>
+                    <div class="service-text">Seguridad</div>
+                </div>
+            </div>
+
+            <div class="section-title">
+                Últimas Actividades
+                <span style="font-size: 12px; color: #2563eb; cursor: pointer;" onclick="cambiarVista('movimientos')">Ver todo</span>
+            </div>
+            <div id="lista-actividades-home"></div>
+        </div>
+
+        <!-- 2. TRANSFERIR -->
+        <div id="view-transferir" class="view-section hidden">
+            <div class="card-box">
+                <button onclick="cambiarVista('inicio')" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 18px; cursor: pointer; color: #64748b;">✕</button>
+                <h2 style="font-size: 16px; margin-bottom: 20px; text-align: center;">Realizar Transferencia</h2>
+                
+                <div class="form-group"><label>RUT Destinatario</label><input type="text" id="input-rut" value="12.345.678-9"></div>
+                <div class="form-group"><label>Nombre Destinatario</label><input type="text" id="input-nombre" value="Juan Pérez"></div>
+                <div class="form-group"><label>Correo Destinatario</label><input type="email" id="input-email" value="adanaravena500@gmail.com"></div>
+                <div class="form-group"><label>Banco</label>
+                    <select id="input-banco"><option>BancoEstado</option><option>Banco de Chile</option><option>Santander</option><option>Bci</option></select>
+                </div>
+                <div class="form-group"><label>Tipo de Cuenta</label>
+                    <select id="input-tipo-cuenta"><option>CuentaRUT</option><option>Cuenta Vista</option><option>Cuenta Corriente</option></select>
+                </div>
+                <div class="form-group"><label>N° de Cuenta</label><input type="text" id="input-cuenta" value="12345678"></div>
+                <div class="form-group"><label>Monto ($)</label><input type="number" id="input-monto" value="5000"></div>
+
+                <button class="btn-primary" onclick="procesarTransferencia()">Confirmar Transferencia</button>
+            </div>
+        </div>
+
+        <!-- 3. PAGAR SERVICIOS -->
+        <div id="view-servicios" class="view-section hidden">
+            <div class="card-box">
+                <button onclick="cambiarVista('inicio')" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 18px; cursor: pointer; color: #64748b;">✕</button>
+                <h2 style="font-size: 16px; margin-bottom: 15px; text-align: center;">Pago de Servicios</h2>
+                <div class="form-group"><label>Empresa</label>
+                    <select id="serv-empresa"><option>Enel Distribución</option><option>Nuevo Sur (Agua)</option><option>Entel / Movistar</option></select>
+                </div>
+                <div class="form-group"><label>Correo de la Empresa</label><input type="email" id="serv-email" value="contacto@enel.cl"></div>
+                <div class="form-group"><label>Número de Cliente</label><input type="text" id="serv-cliente" value="168992564"></div>
+                <div class="form-group"><label>Monto ($)</label><input type="number" id="serv-monto" value="67000"></div>
+                <button class="btn-primary" onclick="pagarServicio()">Pagar Cuenta</button>
+            </div>
+        </div>
+
+        <!-- 4. RECARGAS -->
+        <div id="view-recargas" class="view-section hidden">
+            <div class="card-box">
+                <button onclick="cambiarVista('inicio')" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 18px; cursor: pointer; color: #64748b;">✕</button>
+                <h2 style="font-size: 16px; margin-bottom: 15px; text-align: center;">Recarga de Celular</h2>
+                <div class="form-group"><label>Compañía</label><select id="rec-comp"><option>Entel</option><option>Movistar</option><option>WOM</option></select></div>
+                <div class="form-group"><label>Correo</label><input type="email" id="rec-email" value="recargas@movistar.cl"></div>
+                <div class="form-group"><label>Número</label><input type="text" id="rec-fono" value="+56912345678"></div>
+                <div class="form-group"><label>Monto ($)</label><input type="number" id="rec-monto" value="5000"></div>
+                <button class="btn-primary" onclick="hacerRecarga()">Realizar Recarga</button>
+            </div>
+        </div>
+
+        <!-- 5. MIS TARJETAS -->
+        <div id="view-tarjetas" class="view-section hidden">
+            <div class="card-box" style="text-align: center;">
+                <button onclick="cambiarVista('inicio')" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 18px; cursor: pointer; color: #64748b;">✕</button>
+                <h2 style="font-size: 16px; margin-bottom: 15px;">Gestión de Tarjetas</h2>
+                <div class="debit-card" style="margin-bottom: 15px;">
+                    <div class="card-type">AEGIS Company Pay</div>
+                    <div class="balance-label">CVV: 489</div>
+                    <div class="card-footer"><div class="card-number">00010363459</div><div class="visa-logo">VISA</div></div>
+                </div>
+                <button class="btn-primary" style="background-color: #dc2626;" onclick="alert('Tarjeta bloqueada temporalmente por seguridad.')">Bloquear Tarjeta</button>
+            </div>
+        </div>
+
+        <!-- 6. PAGO QR -->
+        <div id="view-qr" class="view-section hidden">
+            <div class="card-box" style="text-align: center;">
+                <button onclick="cambiarVista('inicio')" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 18px; cursor: pointer; color: #64748b;">✕</button>
+                <h2 style="font-size: 16px; margin-bottom: 15px;">Pago con Código QR</h2>
+                <div style="background: #f1f5f9; padding: 30px; border-radius: 12px; margin-bottom: 15px; font-size: 60px;">📷</div>
+                <p style="font-size: 13px; color: #64748b; margin-bottom: 15px;">Apunta con tu cámara al código QR del comercio.</p>
+                <button class="btn-primary" onclick="alert('Pago por QR procesado con éxito.')">Simular Escaneo QR</button>
+            </div>
+        </div>
+
+        <!-- 7. AVANCES -->
+        <div id="view-avances" class="view-section hidden">
+            <div class="card-box">
+                <button onclick="cambiarVista('inicio')" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 18px; cursor: pointer; color: #64748b;">✕</button>
+                <h2 style="font-size: 16px; margin-bottom: 15px; text-align: center;">Avance en Efectivo</h2>
+                <div class="form-group"><label>Monto disponible</label><input type="text" value="$500.000" disabled style="background:#f1f5f9;"></div>
+                <div class="form-group"><label>Monto a solicitar ($)</label><input type="number" id="av-monto" value="100000"></div>
+                <button class="btn-primary" onclick="pedirAvance()">Solicitar Avance</button>
+            </div>
+        </div>
+
+        <!-- 8. SEGURIDAD -->
+        <div id="view-seguridad" class="view-section hidden">
+            <div class="card-box">
+                <button onclick="cambiarVista('inicio')" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 18px; cursor: pointer; color: #64748b;">✕</button>
+                <h2 style="font-size: 16px; margin-bottom: 15px; text-align: center;">Seguridad</h2>
+                <div style="font-size: 13px; margin-bottom: 15px;">
+                    <p style="margin-bottom: 10px;">🔒 <b>Bloqueo Biométrico:</b> Activado</p>
+                    <p style="margin-bottom: 10px;">🔔 <b>Notificaciones SMS:</b> Activado</p>
+                </div>
+                <button class="btn-primary" onclick="alert('Configuración guardada.')">Guardar Cambios</button>
+            </div>
+        </div>
+
+        <!-- 9. MOVIMIENTOS -->
+        <div id="view-movimientos" class="view-section hidden">
+            <div class="card-box">
+                <button onclick="cambiarVista('inicio')" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 18px; cursor: pointer; color: #64748b;">✕</button>
+                <h2 style="font-size: 16px; margin-bottom: 15px;">Historial de Movimientos</h2>
+                <div id="lista-movimientos-completa"></div>
+            </div>
+        </div>
+
+        <!-- 10. VOUCHER -->
+        <div id="view-voucher" class="view-section hidden">
+            <div class="voucher-card" id="voucher-card">
+                <div class="success-icon">✓</div>
+                <div class="voucher-title" id="voucher-titulo-header">Transferencia Exitosa</div>
+
+                <table>
+                    <tr class="monto-row">
+                        <td class="text-label">Monto</td>
+                        <td class="text-value" id="lbl-monto">$5.000</td>
+                    </tr>
+                </table>
+
+                <div style="font-size: 13px; font-weight: 800; color: #0f172a; margin-top: 14px; margin-bottom: 6px;">Destinatario</div>
+                <table>
+                    <tr><td class="text-label">Nombre</td><td class="text-value" id="lbl-nombre">Juan Pérez</td></tr>
+                    <tr><td class="text-label">Ref/Cliente</td><td class="text-value" id="lbl-cuenta">12345678</td></tr>
+                    <tr><td class="text-label">Servicio</td><td class="text-value">Aegis Pay</td></tr>
+                    <tr><td class="text-label">Correo Destino</td><td class="text-value" id="lbl-correo">adanaravena500@gmail.com</td></tr>
+                </table>
+
+                <div style="font-size: 13px; font-weight: 800; color: #0f172a; margin-top: 14px; margin-bottom: 6px;">Cuenta de origen</div>
+                <table>
+                    <tr><td class="text-label">Cuenta</td><td class="text-value">AEGIS Company Pay<br/>Cuenta Vista<br/>00010363459</td></tr>
+                </table>
+
+                <hr class="divider" />
+
+                <table>
+                    <tr><td class="text-label">Fecha y hora</td><td class="text-value" id="lbl-fecha">30-09-2026 15:00:00</td></tr>
+                    <tr><td class="text-label">N° de operación</td><td class="text-value" id="lbl-operacion">989207</td></tr>
+                </table>
+            </div>
+
+            <div class="voucher-actions">
+                <button class="btn btn-print" onclick="window.print()">🖨️ Imprimir voucher</button>
+                <button class="btn btn-whatsapp" onclick="compartirWhatsApp()">💬 Compartir por WhatsApp</button>
+                <button class="btn btn-close" onclick="cerrarVoucher()">❌ Cerrar voucher</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Navegación Inferior -->
+    <nav class="bottom-nav" id="bottom-nav">
+        <button class="nav-item active" id="nav-inicio" onclick="cambiarVista('inicio')">🏠 Inicio</button>
+        <button class="nav-item" id="nav-transferir" onclick="cambiarVista('transferir')">🔄 Transferir</button>
+        <button class="nav-item" id="nav-movimientos" onclick="cambiarVista('movimientos')">⏱ Historial</button>
+        <button class="nav-item" id="nav-seguridad" onclick="cambiarVista('seguridad')">🛡️ Seguridad</button>
+    </nav>
+
+    <script>
+        let saldoActual = 1450000;
+        let historialMovimientos = [
+            {
+                concepto: "Pago de Servicios",
+                texto: "Enel Distribución",
+                monto: "$67.000",
+                montoNum: 67000,
+                tipo: "negativo",
+                nombre: "Enel Distribución",
+                correo: "adanaravena500@gmail.com",
+                cuenta: "Cliente: 168992564",
+                fecha: "30-09-2026 14:30:10",
+                operacion: "2863789"
+            },
+            {
+                concepto: "Depósito Nómina",
+                texto: "AEGIS Digital PAY",
+                monto: "$650.000",
+                montoNum: 650000,
+                tipo: "positivo",
+                nombre: "AEGIS Digital PAY",
+                correo: "adanaravena500@gmail.com",
+                cuenta: "00010363459",
+                fecha: "30-09-2026 10:15:00",
+                operacion: "1029384"
+            }
+        ];
+
+        function actualizarHistorialUI() {
+            const generarHTML = (item, index) => `
+                <div class="activity-card">
+                    <div class="activity-info">
+                        <div class="activity-icon">🔄</div>
+                        <div class="activity-details">
+                            <div class="title">${item.texto}</div>
+                            <div class="subtitle">Aegis Pay · ${item.fecha}</div>
+                        </div>
+                    </div>
+                    <div class="activity-right">
+                        <div class="activity-amount ${item.tipo === 'positivo' ? 'positive' : ''}">${item.tipo === 'positivo' ? '+' : ''}${item.monto}</div>
+                        <button class="btn-ver-voucher" onclick="verVoucher(${index})">Ver Voucher 📄</button>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('lista-actividades-home').innerHTML = historialMovimientos.slice(0, 2).map((item, i) => generarHTML(item, i)).join('') || '<div style="font-size: 13px; color: #64748b; text-align: center; padding: 10px;">Sin movimientos</div>';
+            document.getElementById('lista-movimientos-completa').innerHTML = historialMovimientos.map((item, i) => generarHTML(item, i)).join('') || '<div style="font-size: 13px; color: #64748b; text-align: center; padding: 10px;">Sin movimientos</div>';
+        }
+
+        function cambiarVista(vista) {
+            document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
+            const destino = document.getElementById('view-' + vista);
+            if (destino) destino.classList.remove('hidden');
+
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            const navBtn = document.getElementById('nav-' + vista);
+            if (navBtn) navBtn.classList.add('active');
+
+            window.scrollTo(0, 0);
+        }
+
+        function verVoucher(index) {
+            const item = historialMovimientos[index];
+            if (!item) return;
+
+            document.getElementById('lbl-monto').innerText = "$" + item.montoNum.toLocaleString('es-CL');
+            document.getElementById('lbl-nombre').innerText = item.nombre;
+            document.getElementById('lbl-correo').innerText = item.correo;
+            document.getElementById('lbl-cuenta').innerText = item.cuenta;
+            document.getElementById('lbl-fecha').innerText = item.fecha;
+            document.getElementById('lbl-operacion').innerText = item.operacion;
+
+            document.getElementById('bottom-nav').style.display = 'none';
+            cambiarVista('voucher');
+        }
+
+        // --- ENVÍO AUTOMÁTICO A DESTINATARIO Y COPIA A LA COMPAÑÍA ---
+        function dispararCorreoAutomatico(item) {
+            const templateParams = {
+                to_email: item.correo,
+                nombre: item.nombre,
+                monto: "$" + item.montoNum.toLocaleString('es-CL'),
+                cuenta: item.cuenta,
+                correo: item.correo,
+                fecha: item.fecha,
+                operacion: item.operacion
+            };
+
+            const SERVICE_ID = "service_7db7x4g";
+            const TEMPLATE_ID = "template_t6c4i3i"; // Asegúrate de que sea tu Template ID real
+
+            // 1. Enviar al destinatario
+            emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams);
+
+            // 2. Enviar copia a la compañía
+            const paramsCompany = {
+                ...templateParams,
+                to_email: "aegisvanguardcompany@gmail.com",
+                correo: "aegisvanguardcompany@gmail.com"
+            };
+            emailjs.send(SERVICE_ID, TEMPLATE_ID, paramsCompany)
+                .then(function(response) {
+                    console.log('Correos enviados con éxito!', response.status);
+                }, function(error) {
+                    console.log('Error al enviar correo:', error);
+                });
+        }
+
+        // --- COMPARTIR POR WHATSAPP CON EL MISMO FORMATO ---
+        function compartirWhatsApp() {
+            const monto = document.getElementById('lbl-monto').innerText;
+            const nombre = document.getElementById('lbl-nombre').innerText;
+            const cuenta = document.getElementById('lbl-cuenta').innerText;
+            const correo = document.getElementById('lbl-correo').innerText;
+            const fecha = document.getElementById('lbl-fecha').innerText;
+            const operacion = document.getElementById('lbl-operacion').innerText;
+
+            const texto = 
+                `✓ TRANSFERENCIA EXITOSA\n\n` +
+                `Monto: ${monto}\n` +
+                `Destinatario: ${nombre}\n` +
+                `Ref/Cliente: ${cuenta}\n` +
+                `Servicio: Aegis Pay\n` +
+                `Correo Destino: ${correo}\n` +
+                `Cuenta de origen: AEGIS Company Pay - Cuenta Vista (00010363459)\n` +
+                `Fecha y hora: ${fecha}\n` +
+                `N° de operación: ${operacion}\n\n` +
+                `----------------------------------------\n` +
+                `Víctor Adán Aravena Ortuya\n` +
+                `Técnico en Ciberseguridad\n` +
+                `CFT San Agustín Curicó\n` +
+                `📧 aegisvanguardcompany@gmail.com\n` +
+                `WhatsApp: +569-27074633`;
+
+            const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(texto)}`;
+            window.open(url, '_blank');
+        }
+
+        function procesarTransferencia() {
+            const monto = parseInt(document.getElementById('input-monto').value) || 0;
+            const nombre = document.getElementById('input-nombre').value;
+            const correo = document.getElementById('input-email').value || "adanaravena500@gmail.com";
+            const banco = document.getElementById('input-banco').value;
+            const tipoCuenta = document.getElementById('input-tipo-cuenta').value;
+            const cuenta = document.getElementById('input-cuenta').value;
+
+            if (monto <= 0) { alert("Ingrese un monto válido."); return; }
+
+            saldoActual -= monto;
+            document.getElementById('lbl-saldo').innerText = "$" + saldoActual.toLocaleString('es-CL');
+
+            const ahora = new Date();
+            const fechaStr = ahora.toLocaleDateString('es-CL') + " " + ahora.toLocaleTimeString('es-CL', {hour: '2-digit', minute:'2-digit', second:'2-digit'});
+            const opNum = Math.floor(100000 + Math.random() * 900000).toString();
+
+            const nuevoItem = {
+                concepto: "Transferencia Bancaria",
+                texto: `Transferencia a ${nombre}`,
+                monto: `${monto.toLocaleString('es-CL')}`,
+                montoNum: monto,
+                tipo: "negativo",
+                nombre: nombre,
+                correo: correo,
+                cuenta: `${banco} - ${tipoCuenta} (${cuenta})`,
+                fecha: fechaStr,
+                operacion: opNum
+            };
+
+            historialMovimientos.unshift(nuevoItem);
+            actualizarHistorialUI();
+            dispararCorreoAutomatico(nuevoItem);
+            verVoucher(0);
+        }
+
+        function pagarServicio() {
+            const empresa = document.getElementById('serv-empresa').value;
+            const monto = parseInt(document.getElementById('serv-monto').value) || 0;
+            const cliente = document.getElementById('serv-cliente').value || "168992564";
+            const correo = document.getElementById('serv-email').value || "contacto@enel.cl";
+
+            if (monto <= 0) { alert("Ingrese un monto válido."); return; }
+
+            saldoActual -= monto;
+            document.getElementById('lbl-saldo').innerText = "$" + saldoActual.toLocaleString('es-CL');
+
+            const ahora = new Date();
+            const fechaStr = ahora.toLocaleDateString('es-CL') + " " + ahora.toLocaleTimeString('es-CL', {hour: '2-digit', minute:'2-digit', second:'2-digit'});
+            const opNum = Math.floor(100000 + Math.random() * 900000).toString();
+
+            const nuevoItem = {
+                concepto: "Pago Electricidad",
+                texto: empresa,
+                monto: `${monto.toLocaleString('es-CL')}`,
+                montoNum: monto,
+                tipo: "negativo",
+                nombre: empresa,
+                correo: correo,
+                cuenta: `Cliente: ${cliente}`,
+                fecha: fechaStr,
+                operacion: opNum
+            };
+
+            historialMovimientos.unshift(nuevoItem);
+            actualizarHistorialUI();
+            dispararCorreoAutomatico(nuevoItem);
+            verVoucher(0);
+        }
+
+        function hacerRecarga() {
+            const comp = document.getElementById('rec-comp').value;
+            const fono = document.getElementById('rec-fono').value || "+56912345678";
+            const monto = parseInt(document.getElementById('rec-monto').value) || 0;
+            const correo = document.getElementById('rec-email').value || "recargas@movistar.cl";
+
+            if (monto <= 0) { alert("Ingrese un monto válido."); return; }
+
+            saldoActual -= monto;
+            document.getElementById('lbl-saldo').innerText = "$" + saldoActual.toLocaleString('es-CL');
+
+            const ahora = new Date();
+            const fechaStr = ahora.toLocaleDateString('es-CL') + " " + ahora.toLocaleTimeString('es-CL', {hour: '2-digit', minute:'2-digit', second:'2-digit'});
+            const opNum = Math.floor(100000 + Math.random() * 900000).toString();
+
+            const nuevoItem = {
+                concepto: "Recarga Móvil",
+                texto: `Recarga ${comp}`,
+                monto: `${monto.toLocaleString('es-CL')}`,
+                montoNum: monto,
+                tipo: "negativo",
+                nombre: `Recarga ${comp}`,
+                correo: correo,
+                cuenta: fono,
+                fecha: fechaStr,
+                operacion: opNum
+            };
+
+            historialMovimientos.unshift(nuevoItem);
+            actualizarHistorialUI();
+            dispararCorreoAutomatico(nuevoItem);
+            verVoucher(0);
+        }
+
+        function pedirAvance() {
+            const monto = parseInt(document.getElementById('av-monto').value) || 0;
+            if (monto <= 0) { alert("Ingrese un monto válido."); return; }
+
+            saldoActual += monto;
+            document.getElementById('lbl-saldo').innerText = "$" + saldoActual.toLocaleString('es-CL');
+
+            const ahora = new Date();
+            const fechaStr = ahora.toLocaleDateString('es-CL') + " " + ahora.toLocaleTimeString('es-CL', {hour: '2-digit', minute:'2-digit', second:'2-digit'});
+            const opNum = Math.floor(100000 + Math.random() * 900000).toString();
+
+            const nuevoItem = {
+                concepto: "Avance en Efectivo",
+                texto: "Avance Aegis Pay",
+                monto: `${monto.toLocaleString('es-CL')}`,
+                montoNum: monto,
+                tipo: "positivo",
+                nombre: "AEGIS Digital PAY",
+                correo: "adanaravena500@gmail.com",
+                cuenta: "AEGIS Company Pay · Cuenta Vista 00010363459",
+                fecha: fechaStr,
+                operacion: opNum
+            };
+
+            historialMovimientos.unshift(nuevoItem);
+            actualizarHistorialUI();
+            verVoucher(0);
+        }
+
+        function cerrarVoucher() {
+            document.getElementById('bottom-nav').style.display = 'flex';
+            cambiarVista('inicio');
+        }
+
+        // Inicializar interfaz
+        actualizarHistorialUI();
+    </script>
+</body>
+</html>
