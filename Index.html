@@ -9,7 +9,7 @@
     <script type="text/javascript">
         (function() {
             emailjs.init({
-                publicKey: "lwlr_VijqU2m_p2f9", // Tu Public Key
+                publicKey: "lwlr_VijqU2m_p2f9",
             });
         })();
     </script>
@@ -204,7 +204,7 @@
         .activity-details .subtitle { font-size: 11px; color: #64748b; margin-top: 2px; }
 
         .activity-right { text-align: right; }
-        .activity-amount { font-size: 14px; font-weight: 800; color: #ef4444; margin-bottom: 6px; }
+        .activity-amount { font-size: 14px; font-weight: 800; color: #0f172a; margin-bottom: 6px; }
         .activity-amount.positive { color: #10b981; }
 
         .btn-ver-voucher {
@@ -372,7 +372,7 @@
                     <div class="service-text">Avances</div>
                 </div>
                 <div class="service-item" onclick="cambiarVista('seguridad')">
-                    <div class="service-icon" style="background: #f0fdfa; color: #0d9488;">🛡️️</div>
+                    <div class="service-icon" style="background: #f0fdfa; color: #0d9488;">🛡</div>
                     <div class="service-text">Seguridad</div>
                 </div>
             </div>
@@ -549,7 +549,6 @@
             {
                 concepto: "Pago de Servicios",
                 texto: "Enel Distribución",
-                monto: "$67.000",
                 montoNum: 67000,
                 tipo: "negativo",
                 nombre: "Enel Distribución",
@@ -561,7 +560,6 @@
             {
                 concepto: "Depósito Nómina",
                 texto: "AEGIS Digital PAY",
-                monto: "$650.000",
                 montoNum: 650000,
                 tipo: "positivo",
                 nombre: "AEGIS Digital PAY",
@@ -583,7 +581,7 @@
                         </div>
                     </div>
                     <div class="activity-right">
-                        <div class="activity-amount ${item.tipo === 'positivo' ? 'positive' : ''}">${item.tipo === 'positivo' ? '+' : ''}${item.monto}</div>
+                        <div class="activity-amount ${item.tipo === 'positivo' ? 'positive' : ''}">${item.tipo === 'positivo' ? '+' : ''}$${item.montoNum.toLocaleString('es-CL')}</div>
                         <button class="btn-ver-voucher" onclick="verVoucher(${index})">Ver Voucher 📄</button>
                     </div>
                 </div>
@@ -620,9 +618,13 @@
             cambiarVista('voucher');
         }
 
-        // --- ENVÍO AUTOMÁTICO A DESTINATARIO Y COPIA A LA COMPAÑÍA ---
+        // --- ENVÍO DE CORREOS CON RETRASO PARA ASEGURAR AMBOS DESTINOS ---
         function dispararCorreoAutomatico(item) {
-            const templateParams = {
+            const SERVICE_ID = "service_7db7x4g";
+            const TEMPLATE_ID = "template_t6c4i3i";
+
+            // 1. Parámetros para el destinatario
+            const paramsDestinatario = {
                 to_email: item.correo,
                 nombre: item.nombre,
                 monto: "$" + item.montoNum.toLocaleString('es-CL'),
@@ -632,27 +634,31 @@
                 operacion: item.operacion
             };
 
-            const SERVICE_ID = "service_7db7x4g";
-            const TEMPLATE_ID = "template_t6c4i3i"; // Asegúrate de que sea tu Template ID real
-
-            // 1. Enviar al destinatario
-            emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams);
-
-            // 2. Enviar copia a la compañía
+            // 2. Parámetros para la compañía
             const paramsCompany = {
-                ...templateParams,
                 to_email: "aegisvanguardcompany@gmail.com",
-                correo: "aegisvanguardcompany@gmail.com"
+                nombre: item.nombre,
+                monto: "$" + item.montoNum.toLocaleString('es-CL'),
+                cuenta: item.cuenta,
+                correo: "aegisvanguardcompany@gmail.com",
+                fecha: item.fecha,
+                operacion: item.operacion
             };
-            emailjs.send(SERVICE_ID, TEMPLATE_ID, paramsCompany)
-                .then(function(response) {
-                    console.log('Correos enviados con éxito!', response.status);
-                }, function(error) {
-                    console.log('Error al enviar correo:', error);
-                });
+
+            // Enviar correo al destinatario
+            emailjs.send(SERVICE_ID, TEMPLATE_ID, paramsDestinatario)
+                .then(function(res) { console.log('Correo destinatario OK', res.status); }, 
+                      function(err) { console.log('Error correo destinatario', err); });
+
+            // Enviar correo a la compañía con 1 segundo de retraso para evitar bloqueo de API
+            setTimeout(() => {
+                emailjs.send(SERVICE_ID, TEMPLATE_ID, paramsCompany)
+                    .then(function(res) { console.log('Correo compañía OK', res.status); }, 
+                          function(err) { console.log('Error correo compañía', err); });
+            }, 1000);
         }
 
-        // --- COMPARTIR POR WHATSAPP CON EL MISMO FORMATO ---
+        // --- COMPARTIR POR WHATSAPP ---
         function compartirWhatsApp() {
             const monto = document.getElementById('lbl-monto').innerText;
             const nombre = document.getElementById('lbl-nombre').innerText;
@@ -702,7 +708,6 @@
             const nuevoItem = {
                 concepto: "Transferencia Bancaria",
                 texto: `Transferencia a ${nombre}`,
-                monto: `${monto.toLocaleString('es-CL')}`,
                 montoNum: monto,
                 tipo: "negativo",
                 nombre: nombre,
@@ -736,7 +741,6 @@
             const nuevoItem = {
                 concepto: "Pago Electricidad",
                 texto: empresa,
-                monto: `${monto.toLocaleString('es-CL')}`,
                 montoNum: monto,
                 tipo: "negativo",
                 nombre: empresa,
@@ -770,7 +774,6 @@
             const nuevoItem = {
                 concepto: "Recarga Móvil",
                 texto: `Recarga ${comp}`,
-                monto: `${monto.toLocaleString('es-CL')}`,
                 montoNum: monto,
                 tipo: "negativo",
                 nombre: `Recarga ${comp}`,
@@ -800,7 +803,6 @@
             const nuevoItem = {
                 concepto: "Avance en Efectivo",
                 texto: "Avance Aegis Pay",
-                monto: `${monto.toLocaleString('es-CL')}`,
                 montoNum: monto,
                 tipo: "positivo",
                 nombre: "AEGIS Digital PAY",
