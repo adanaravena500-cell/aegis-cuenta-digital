@@ -581,7 +581,7 @@
                         </div>
                     </div>
                     <div class="activity-right">
-                        <div class="activity-amount ${item.tipo === 'positivo' ? 'positive' : ''}">${item.tipo === 'positivo' ? '+' : ''}$${item.montoNum.toLocaleString('es-CL')}</div>
+                        <div class="activity-amount ${item.tipo === 'positivo' ? 'positive' : ''}">${item.tipo === 'positivo' ? '+' : ''}$${Math.abs(item.montoNum).toLocaleString('es-CL')}</div>
                         <button class="btn-ver-voucher" onclick="verVoucher(${index})">Ver Voucher 📄</button>
                     </div>
                 </div>
@@ -607,7 +607,9 @@
             const item = historialMovimientos[index];
             if (!item) return;
 
-            document.getElementById('lbl-monto').innerText = "$" + item.montoNum.toLocaleString('es-CL');
+            // Forzar valor absoluto limpio sin signo menos
+            const montoLimpio = Math.abs(item.montoNum);
+            document.getElementById('lbl-monto').innerText = "$" + montoLimpio.toLocaleString('es-CL');
             document.getElementById('lbl-nombre').innerText = item.nombre;
             document.getElementById('lbl-correo').innerText = item.correo;
             document.getElementById('lbl-cuenta').innerText = item.cuenta;
@@ -618,44 +620,27 @@
             cambiarVista('voucher');
         }
 
-        // --- ENVÍO DE CORREOS CON RETRASO PARA ASEGURAR AMBOS DESTINOS ---
+        // --- CORREO ÚNICO CON COPIA A LA COMPAÑÍA (CONFIGURA CC EN EMAILJS) ---
         function dispararCorreoAutomatico(item) {
             const SERVICE_ID = "service_7db7x4g";
             const TEMPLATE_ID = "template_t6c4i3i";
 
-            // 1. Parámetros para el destinatario
-            const paramsDestinatario = {
-                to_email: item.correo,
+            const templateParams = {
+                to_email: item.correo, // Correo del destinatario
                 nombre: item.nombre,
-                monto: "$" + item.montoNum.toLocaleString('es-CL'),
+                monto: "$" + Math.abs(item.montoNum).toLocaleString('es-CL'),
                 cuenta: item.cuenta,
                 correo: item.correo,
                 fecha: item.fecha,
                 operacion: item.operacion
             };
 
-            // 2. Parámetros para la compañía
-            const paramsCompany = {
-                to_email: "aegisvanguardcompany@gmail.com",
-                nombre: item.nombre,
-                monto: "$" + item.montoNum.toLocaleString('es-CL'),
-                cuenta: item.cuenta,
-                correo: "aegisvanguardcompany@gmail.com",
-                fecha: item.fecha,
-                operacion: item.operacion
-            };
-
-            // Enviar correo al destinatario
-            emailjs.send(SERVICE_ID, TEMPLATE_ID, paramsDestinatario)
-                .then(function(res) { console.log('Correo destinatario OK', res.status); }, 
-                      function(err) { console.log('Error correo destinatario', err); });
-
-            // Enviar correo a la compañía con 1 segundo de retraso para evitar bloqueo de API
-            setTimeout(() => {
-                emailjs.send(SERVICE_ID, TEMPLATE_ID, paramsCompany)
-                    .then(function(res) { console.log('Correo compañía OK', res.status); }, 
-                          function(err) { console.log('Error correo compañía', err); });
-            }, 1000);
+            emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
+                .then(function(res) { 
+                    console.log('Correo enviado correctamente', res.status); 
+                }, function(err) { 
+                    console.log('Error al enviar correo', err); 
+                });
         }
 
         // --- COMPARTIR POR WHATSAPP ---
