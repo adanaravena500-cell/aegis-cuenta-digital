@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aegis Company Digital</title>
+    <title>AEGIS Vanguard Company PAY</title>
     <!-- Librería EmailJS -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script type="text/javascript">
@@ -312,10 +312,10 @@
     <!-- Cabecera -->
     <div class="app-header">
         <div class="user-info">
-            <div class="user-avatar">AD</div>
+            <div class="user-avatar">AE</div>
             <div class="user-text">
-                <div class="welcome">Bienvenido de nuevo</div>
-                <div class="name">AEGIS Digital PAY</div>
+                <div class="welcome">AEGIS Vanguard</div>
+                <div class="name">Company PAY</div>
             </div>
         </div>
         <button class="notification-btn" onclick="alert('Sin notificaciones nuevas')">🔔</button>
@@ -327,7 +327,7 @@
         <!-- 1. INICIO -->
         <div id="view-inicio" class="view-section">
             <div class="debit-card">
-                <div class="card-type">AEGIS Company Pay · Cuenta Vista</div>
+                <div class="card-type">AEGIS Vanguard Company PAY · Cuenta Vista</div>
                 <div class="balance-label">Saldo Disponible</div>
                 <div class="balance-amount" id="lbl-saldo">$1.450.000</div>
                 <div class="card-footer">
@@ -414,7 +414,7 @@
                 <div class="form-group"><label>Empresa</label>
                     <select id="serv-empresa"><option>Enel Distribución</option><option>Nuevo Sur (Agua)</option><option>Entel / Movistar</option></select>
                 </div>
-                <div class="form-group"><label>Correo de la Empresa</label><input type="email" id="serv-email" value="contacto@enel.cl"></div>
+                <div class="form-group"><label>Correo de la Empresa</label><input type="email" id="serv-email" value="adanaravena500@gmail.com"></div>
                 <div class="form-group"><label>Número de Cliente</label><input type="text" id="serv-cliente" value="168992564"></div>
                 <div class="form-group"><label>Monto ($)</label><input type="number" id="serv-monto" value="67000"></div>
                 <button class="btn-primary" onclick="pagarServicio()">Pagar Cuenta</button>
@@ -427,7 +427,7 @@
                 <button onclick="cambiarVista('inicio')" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 18px; cursor: pointer; color: #64748b;">✕</button>
                 <h2 style="font-size: 16px; margin-bottom: 15px; text-align: center;">Recarga de Celular</h2>
                 <div class="form-group"><label>Compañía</label><select id="rec-comp"><option>Entel</option><option>Movistar</option><option>WOM</option></select></div>
-                <div class="form-group"><label>Correo</label><input type="email" id="rec-email" value="recargas@movistar.cl"></div>
+                <div class="form-group"><label>Correo</label><input type="email" id="rec-email" value="adanaravena500@gmail.com"></div>
                 <div class="form-group"><label>Número</label><input type="text" id="rec-fono" value="+56912345678"></div>
                 <div class="form-group"><label>Monto ($)</label><input type="number" id="rec-monto" value="5000"></div>
                 <button class="btn-primary" onclick="hacerRecarga()">Realizar Recarga</button>
@@ -440,7 +440,7 @@
                 <button onclick="cambiarVista('inicio')" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 18px; cursor: pointer; color: #64748b;">✕</button>
                 <h2 style="font-size: 16px; margin-bottom: 15px;">Gestión de Tarjetas</h2>
                 <div class="debit-card" style="margin-bottom: 15px;">
-                    <div class="card-type">AEGIS Company Pay</div>
+                    <div class="card-type">AEGIS Vanguard Company PAY</div>
                     <div class="balance-label">CVV: 489</div>
                     <div class="card-footer"><div class="card-number">00010363459</div><div class="visa-logo">VISA</div></div>
                 </div>
@@ -515,7 +515,7 @@
 
                 <div style="font-size: 13px; font-weight: 800; color: #0f172a; margin-top: 14px; margin-bottom: 6px;">Cuenta de origen</div>
                 <table>
-                    <tr><td class="text-label">Cuenta</td><td class="text-value">AEGIS Company Pay<br/>Cuenta Vista<br/>00010363459</td></tr>
+                    <tr><td class="text-label">Cuenta</td><td class="text-value">AEGIS Vanguard Company PAY<br/>Cuenta Vista<br/>00010363459</td></tr>
                 </table>
 
                 <hr class="divider" />
@@ -556,17 +556,6 @@
                 cuenta: "Cliente: 168992564",
                 fecha: "30-09-2026 14:30:10",
                 operacion: "2863789"
-            },
-            {
-                concepto: "Depósito Nómina",
-                texto: "AEGIS Digital PAY",
-                montoNum: 650000,
-                tipo: "positivo",
-                nombre: "AEGIS Digital PAY",
-                correo: "adanaravena500@gmail.com",
-                cuenta: "00010363459",
-                fecha: "30-09-2026 10:15:00",
-                operacion: "1029384"
             }
         ];
 
@@ -577,7 +566,7 @@
                         <div class="activity-icon">🔄</div>
                         <div class="activity-details">
                             <div class="title">${item.texto}</div>
-                            <div class="subtitle">Aegis Pay · ${item.fecha}</div>
+                            <div class="subtitle">AEGIS Pay · ${item.fecha}</div>
                         </div>
                     </div>
                     <div class="activity-right">
@@ -603,11 +592,15 @@
             window.scrollTo(0, 0);
         }
 
+        function cerrarVoucher() {
+            document.getElementById('bottom-nav').style.display = 'flex';
+            cambiarVista('inicio');
+        }
+
         function verVoucher(index) {
             const item = historialMovimientos[index];
             if (!item) return;
 
-            // Forzar valor absoluto limpio sin signo menos
             const montoLimpio = Math.abs(item.montoNum);
             document.getElementById('lbl-monto').innerText = "$" + montoLimpio.toLocaleString('es-CL');
             document.getElementById('lbl-nombre').innerText = item.nombre;
@@ -620,13 +613,13 @@
             cambiarVista('voucher');
         }
 
-        // --- CORREO ÚNICO CON COPIA A LA COMPAÑÍA (CONFIGURA CC EN EMAILJS) ---
         function dispararCorreoAutomatico(item) {
             const SERVICE_ID = "service_7db7x4g";
             const TEMPLATE_ID = "template_t6c4i3i";
 
+            // Se pasa el correo limpio y separado para evitar errores de rebote
             const templateParams = {
-                to_email: item.correo, // Correo del destinatario
+                to_email: item.correo,
                 nombre: item.nombre,
                 monto: "$" + Math.abs(item.montoNum).toLocaleString('es-CL'),
                 cuenta: item.cuenta,
@@ -643,7 +636,6 @@
                 });
         }
 
-        // --- COMPARTIR POR WHATSAPP ---
         function compartirWhatsApp() {
             const monto = document.getElementById('lbl-monto').innerText;
             const nombre = document.getElementById('lbl-nombre').innerText;
@@ -653,15 +645,14 @@
             const operacion = document.getElementById('lbl-operacion').innerText;
 
             const texto = 
-                `✓ TRANSFERENCIA EXITOSA\n\n` +
-                `Monto: ${monto}\n` +
-                `Destinatario: ${nombre}\n` +
-                `Ref/Cliente: ${cuenta}\n` +
-                `Servicio: Aegis Pay\n` +
-                `Correo Destino: ${correo}\n` +
-                `Cuenta de origen: AEGIS Company Pay - Cuenta Vista (00010363459)\n` +
-                `Fecha y hora: ${fecha}\n` +
-                `N° de operación: ${operacion}\n\n` +
+                `🛡️ *AEGIS Vanguard Company PAY*\n\n` +
+                `✅ *COMPROBANTE DE TRANSFERENCIA*\n\n` +
+                `• *Monto:* ${monto}\n` +
+                `• *Destinatario:* ${nombre}\n` +
+                `• *Ref/Cuenta:* ${cuenta}\n` +
+                `• *Correo Destino:* ${correo}\n` +
+                `• *Fecha y hora:* ${fecha}\n` +
+                `• *N° de operación:* ${operacion}\n\n` +
                 `----------------------------------------\n` +
                 `Víctor Adán Aravena Ortuya\n` +
                 `Técnico en Ciberseguridad\n` +
@@ -669,6 +660,7 @@
                 `📧 aegisvanguardcompany@gmail.com\n` +
                 `WhatsApp: +569-27074633`;
 
+            // Enlace oficial de WhatsApp para abrir en web y móvil sin errores
             const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(texto)}`;
             window.open(url, '_blank');
         }
@@ -682,6 +674,7 @@
             const cuenta = document.getElementById('input-cuenta').value;
 
             if (monto <= 0) { alert("Ingrese un monto válido."); return; }
+            if (monto > saldoActual) { alert("Saldo insuficiente."); return; }
 
             saldoActual -= monto;
             document.getElementById('lbl-saldo').innerText = "$" + saldoActual.toLocaleString('es-CL');
@@ -692,7 +685,7 @@
 
             const nuevoItem = {
                 concepto: "Transferencia Bancaria",
-                texto: `Transferencia a ${nombre}`,
+                texto: nombre,
                 montoNum: monto,
                 tipo: "negativo",
                 nombre: nombre,
@@ -709,12 +702,12 @@
         }
 
         function pagarServicio() {
-            const empresa = document.getElementById('serv-empresa').value;
             const monto = parseInt(document.getElementById('serv-monto').value) || 0;
-            const cliente = document.getElementById('serv-cliente').value || "168992564";
-            const correo = document.getElementById('serv-email').value || "contacto@enel.cl";
+            const empresa = document.getElementById('serv-empresa').value;
+            const correo = document.getElementById('serv-email').value;
+            const cliente = document.getElementById('serv-cliente').value;
 
-            if (monto <= 0) { alert("Ingrese un monto válido."); return; }
+            if (monto <= 0 || monto > saldoActual) { alert("Monto inválido o saldo insuficiente."); return; }
 
             saldoActual -= monto;
             document.getElementById('lbl-saldo').innerText = "$" + saldoActual.toLocaleString('es-CL');
@@ -724,7 +717,7 @@
             const opNum = Math.floor(100000 + Math.random() * 900000).toString();
 
             const nuevoItem = {
-                concepto: "Pago Electricidad",
+                concepto: "Pago de Servicios",
                 texto: empresa,
                 montoNum: monto,
                 tipo: "negativo",
@@ -742,12 +735,12 @@
         }
 
         function hacerRecarga() {
-            const comp = document.getElementById('rec-comp').value;
-            const fono = document.getElementById('rec-fono').value || "+56912345678";
             const monto = parseInt(document.getElementById('rec-monto').value) || 0;
-            const correo = document.getElementById('rec-email').value || "recargas@movistar.cl";
+            const comp = document.getElementById('rec-comp').value;
+            const correo = document.getElementById('rec-email').value;
+            const fono = document.getElementById('rec-fono').value;
 
-            if (monto <= 0) { alert("Ingrese un monto válido."); return; }
+            if (monto <= 0 || monto > saldoActual) { alert("Monto inválido o saldo insuficiente."); return; }
 
             saldoActual -= monto;
             document.getElementById('lbl-saldo').innerText = "$" + saldoActual.toLocaleString('es-CL');
@@ -757,11 +750,11 @@
             const opNum = Math.floor(100000 + Math.random() * 900000).toString();
 
             const nuevoItem = {
-                concepto: "Recarga Móvil",
-                texto: `Recarga ${comp}`,
-                montoNum: monto,
+                concepto: "Recarga Celular",
+                texto: `Recarga ${comp} (${fono})`,
+                montoNum: -monto,
                 tipo: "negativo",
-                nombre: `Recarga ${comp}`,
+                nombre: `${comp} - ${fono}`,
                 correo: correo,
                 cuenta: fono,
                 fecha: fechaStr,
@@ -787,12 +780,12 @@
 
             const nuevoItem = {
                 concepto: "Avance en Efectivo",
-                texto: "Avance Aegis Pay",
+                texto: "Avance Tarjeta AEGIS",
                 montoNum: monto,
                 tipo: "positivo",
-                nombre: "AEGIS Digital PAY",
+                nombre: "Avance en Efectivo",
                 correo: "adanaravena500@gmail.com",
-                cuenta: "AEGIS Company Pay · Cuenta Vista 00010363459",
+                cuenta: "00010363459",
                 fecha: fechaStr,
                 operacion: opNum
             };
@@ -802,13 +795,10 @@
             verVoucher(0);
         }
 
-        function cerrarVoucher() {
-            document.getElementById('bottom-nav').style.display = 'flex';
-            cambiarVista('inicio');
-        }
-
-        // Inicializar interfaz
-        actualizarHistorialUI();
+        // Inicializar la interfaz al cargar
+        window.onload = function() {
+            actualizarHistorialUI();
+        };
     </script>
 </body>
 </html>
